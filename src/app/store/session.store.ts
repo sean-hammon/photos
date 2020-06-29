@@ -1,3 +1,4 @@
+import { GalleryProvider } from './../galleries/gallery.provider';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Galleries } from '../galleries/galleries';
@@ -9,13 +10,17 @@ export class SessionStore {
     loading$: BehaviorSubject<boolean>;
     gallery$: BehaviorSubject<Gallery>;
 
-    constructor() {
+    constructor(
+        private galleryProvider: GalleryProvider
+    ) {
         this.loading$ = new BehaviorSubject(true);
         this.gallery$ = new BehaviorSubject(null);
     }
 
     selectGallery(id: string) {
-        this.gallery$.next({...Galleries[id]});
+        const g = {...Galleries[id]};
+        g.children = this.galleryProvider.childGalleries(g);
+        this.gallery$.next(g);
     }
 
 }
