@@ -1,4 +1,22 @@
 export const Galleries = {
+    ABC123: {
+        parent_id: '',
+        title: 'Home',
+        slug: 'home',
+        node: '000',
+        share_key: null,
+        description: null,
+        restricted: 0,
+        featured: 1,
+        created_at: '2015-10-07 15:42:19',
+        updated_at: '2015-10-07 15:42:19',
+        children: [
+            'YbrMpk',
+            '1z5wB3',
+        ],
+        photos: []
+
+    },
     YBrMpK: {
         parent_id: '',
         title: 'Travel',
@@ -7,7 +25,7 @@ export const Galleries = {
         share_key: null,
         description: null,
         restricted: 0,
-        featured: 1,
+        featured: 0,
         created_at: '2015-10-07 15:42:19',
         updated_at: '2015-10-07 15:42:19',
         children: [
