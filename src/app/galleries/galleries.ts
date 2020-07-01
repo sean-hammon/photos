@@ -14,8 +14,11 @@ export const Galleries = {
             'YbrMpk',
             '1z5wB3',
         ],
-        photos: []
-
+        photos: [
+            'Ppw0QB',
+            'qDqrlz',
+            'Zzon8D'
+        ]
     },
     YBrMpK: {
         parent_id: '',
