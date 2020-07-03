@@ -1,4 +1,4 @@
-export const photos = {
+export const Photos = {
     mBAMoB: {
         id: 194,
         title: 'Cathedral of St. Francis of Assisi',
