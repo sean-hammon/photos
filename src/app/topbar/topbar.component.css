@@ -1,0 +1,23 @@
+:host {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: var(--top-bar-height);
+  color: var(--font-color);
+  background-color: rgb(24, 24, 24, .6);
+}
+
+.site-title {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    letter-spacing: 0.03em;
+    z-index: 1;
+    font-family: var(--secondary-font);
+    font-size: 1.5rem;
+}
+
+.photo{
+    margin-left: 15px;
+    margin-top: 12px;
+}

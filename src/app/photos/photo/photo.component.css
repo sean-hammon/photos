@@ -1,0 +1,19 @@
+.photo  {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #555;
+}
+
+.one {
+    display: block;
+}
+
+.two {
+    display: none;
+}

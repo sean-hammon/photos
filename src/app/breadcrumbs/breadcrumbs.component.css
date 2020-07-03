@@ -1,0 +1,14 @@
+:host {
+  position: absolute;
+  left: 15px;
+  bottom: -3px;
+  font-size: 11px;
+  font-family: var(--primary-font);
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #eedebc;
+}

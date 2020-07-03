@@ -9,7 +9,7 @@ import { Galleries } from 'src/app/galleries/galleries';
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
-  styleUrls: ['./photo.component.sass']
+  styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent implements OnInit, AfterViewInit {
 

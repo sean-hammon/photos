@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.sass'],
+  styleUrls: ['./spinner.component.css'],
   animations: [
     trigger('spinnerState', [
       state('hidden', style({
