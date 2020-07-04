@@ -1,7 +1,6 @@
 :host {
   position: absolute;
-  left: 15px;
-  bottom: -3px;
+  left: 5px;
   font-size: 11px;
   font-family: var(--primary-font);
   font-weight: 300;

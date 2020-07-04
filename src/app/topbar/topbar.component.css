@@ -1,7 +1,9 @@
 :host {
   position: absolute;
+  top: 11px;
+  left: 11px;
+  right: 11px;
   display: block;
-  width: 100%;
   height: var(--top-bar-height);
   color: var(--font-color);
   background-color: rgb(24, 24, 24, .6);
@@ -9,8 +11,8 @@
 
 .site-title {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 5px;
+    right: 5px;
     letter-spacing: 0.03em;
     z-index: 1;
     font-family: var(--secondary-font);
@@ -18,6 +20,6 @@
 }
 
 .photo{
-    margin-left: 15px;
-    margin-top: 12px;
+    margin-left: 5px;
+    margin-top: 2px;
 }
