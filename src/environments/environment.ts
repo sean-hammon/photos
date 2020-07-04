@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  homeGallery: 'ABC123'
+  homeGallery: 'i2Dsu2'
 };
 
 /*

@@ -1,5 +1,5 @@
 export const Galleries = {
-    ABC123: {
+    i2Dsu2: {
         parent_id: '',
         title: 'Home',
         slug: 'home',
@@ -17,7 +17,10 @@ export const Galleries = {
         photos: [
             'Ppw0QB',
             'qDqrlz',
-            'Zzon8D'
+            'Zzon8D',
+            'dDXnlp',
+            'koYhk8',
+            'JBx2Vz'
         ]
     },
     YBrMpK: {
