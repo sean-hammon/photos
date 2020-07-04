@@ -1,10 +1,9 @@
-import { environment } from './../../../environments/environment';
-import { style } from '@angular/animations';
-import { GalleryProvider } from './../../galleries/gallery.provider';
-import { SessionStore } from './../../store/session.store';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Galleries } from 'src/app/galleries/galleries';
+import { environment } from '@env';
+import { SessionStore } from '@app/store/session.store';
+import { Galleries, GalleryProvider } from '@app/galleries';
+import { Photos } from '@app/photos';
 
 @Component({
   selector: 'app-photo',
