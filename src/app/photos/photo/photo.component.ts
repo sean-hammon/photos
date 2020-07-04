@@ -28,11 +28,13 @@ export class PhotoComponent implements OnInit, AfterViewInit {
     this.route.params
       .subscribe(p => {
         if (p.hash) {
-
+          const photo = Photos[p.hash];
+          this.session.setPhoto(photo);
         } else {
           this.session.selectGallery(environment.homeGallery);
           const gallery = Galleries[environment.homeGallery];
           const photo = this.galleries.randomPhoto(gallery);
+          this.session.setPhoto(photo);
           this.one.nativeElement.style.backgroundImage = `url(${photo.photo})`;
         }
       });

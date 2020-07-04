@@ -1,4 +1,6 @@
+import { SessionStore } from '@app/store/session.store';
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-topbar',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor() { }
+  pageTitle: string;
+
+  constructor(
+    private session: SessionStore
+  ) { }
 
   ngOnInit(): void {
+    this.session.photo$
+    .pipe(filter(photo => !!photo))
+    .subscribe(p => {
+      this.pageTitle = p.title;
+    });
   }
 
 }
