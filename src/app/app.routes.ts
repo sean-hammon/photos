@@ -7,4 +7,13 @@ export const ROUTES: Routes = [
         component: PhotoComponent,
         pathMatch: 'full'
     },
+    {
+      path: 'gallery/:gtitle/:ghash/photo/:ptitle/:phash',
+      component: PhotoComponent
+    },
+    {
+      path: '**',
+      redirectTo: '/',
+      pathMatch: 'full'
+    }
 ];
