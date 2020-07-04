@@ -1,19 +1,48 @@
-.photo  {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    z-index: -1;
-    background-size: cover;
-    background-position: center;
-    border: 1px solid #555;
+:host {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
 }
-
+.photo {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #555;
+}
+.photo-nav {
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.photo-nav:hover {
+  background-color: rgba(110, 110, 110, 0.4);
+  cursor: pointer;
+}
+.photo-nav.prev {
+  align-items: flex-start;
+}
+.photo-nav.prev img {
+  margin-left: 2em;
+}
+.photo-nav.next {
+  align-items: flex-end;
+}
+.photo-nav.next img {
+  margin-right: 2em;
+}
+.nav-gap {
+  flex: 5;
+}
 .one {
-    display: block;
+  display: block;
 }
-
 .two {
-    display: none;
+  display: none;
 }
