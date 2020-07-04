@@ -22,7 +22,7 @@
   flex-direction: column;
 }
 .photo-nav:hover {
-  background-color: rgba(110, 110, 110, 0.4);
+  background-color: rgba(110, 110, 110, 0.25);
   cursor: pointer;
 }
 .photo-nav.prev {

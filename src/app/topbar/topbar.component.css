@@ -2,13 +2,13 @@
   position: absolute;
   top: 11px;
   left: 11px;
-  right: 11px;
+  right: 9px;
   display: block;
   height: var(--top-bar-height);
   color: var(--font-color);
-  background-color: rgb(24, 24, 24, .6);
+  background-color: rgba(24, 24, 24, .6);
+  z-index: 999;
 }
-
 .site-title {
     position: absolute;
     top: 5px;
@@ -18,7 +18,6 @@
     font-family: var(--secondary-font);
     font-size: 1.5rem;
 }
-
 .photo{
     margin-left: 5px;
     margin-top: 2px;
