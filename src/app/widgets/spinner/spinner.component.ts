@@ -36,6 +36,7 @@ export class SpinnerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.unsub$ = new Subject();
     this.session.loading$
       .pipe(
         takeUntil(this.unsub$)
