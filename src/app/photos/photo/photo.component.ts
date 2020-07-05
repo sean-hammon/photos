@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { PhotoProvider, PhotoDisplay } from '@app/photos';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
-export class PhotoComponent implements OnInit, AfterViewInit {
+export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   display: PhotoDisplay;
 
@@ -16,6 +18,7 @@ export class PhotoComponent implements OnInit, AfterViewInit {
   @ViewChild('two') two: ElementRef;
 
   private gHash: string;
+  private unsub$: Subject<null>;
 
   constructor(
     private photos: PhotoProvider,
@@ -25,19 +28,42 @@ export class PhotoComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+    this.unsub$ = new Subject();
+    this.router.events
+      .subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.setDisplayPhoto();
+        }
+      });
+    this.setDisplayPhoto();
+  }
+
+  ngAfterViewInit() {
+    this.setImageBackground();
+  }
+
+  ngOnDestroy() {
+    console.log('photo destrory');
+    this.unsub$.next();
+    this.unsub$.complete();
+  }
+
+  setDisplayPhoto() {
     this.route.params
+      .pipe(takeUntil(this.unsub$))
       .subscribe(p => {
         this.gHash = p.ghash;
         this.display = this.photos.getPhoto(p.phash, p.ghash);
         this.session.setPhoto(this.display.photo);
       });
+    if (this.one) {
+      this.setImageBackground();
+    }
   }
 
-  ngAfterViewInit() {
-    if (this.display) {
+  setImageBackground() {
       this.one.nativeElement.style.backgroundImage =
         `url(${this.display.photo.photo})`;
-    }
   }
 
   nextPhoto() {
