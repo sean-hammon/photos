@@ -15,11 +15,11 @@ export class PhotoProvider {
     const index = gallery.photos.findIndex(hash => hash === photoHash);
 
     if (index + 1 < gallery.photos.length) {
-      prev = index + 1;
+      prev = gallery.photos[index + 1];
     }
 
     if (index - 1 >= 0) {
-      next = index - 1;
+      next = gallery.photos[index - 1];
     }
 
     return {
@@ -29,5 +29,14 @@ export class PhotoProvider {
       photo
     };
 
+  }
+
+  makeHref(photoHash: string, galleryHash: string): string[] {
+    const g = Galleries[galleryHash];
+    const p = Photos[photoHash];
+    return [
+      'gallery', g.slug , galleryHash,
+      'photo', p.slug , photoHash
+    ];
   }
 }

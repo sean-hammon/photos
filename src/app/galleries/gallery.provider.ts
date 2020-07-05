@@ -6,7 +6,6 @@ import { PhotoDisplay, Photos } from '@app/photos';
 @Injectable({providedIn: 'root'})
 export class GalleryProvider {
 
-
     childGalleries(parent: Gallery) {
         return parent.children.map(childId => {
             return {...Galleries[childId]};
@@ -25,10 +24,10 @@ export class GalleryProvider {
         const rnd = Math.floor(Math.random() * gallery.photos.length);
         const hash = gallery.photos[rnd];
         if (gallery.photos.length < rnd + 1) {
-          prev = rnd + 1;
+          prev = gallery.photos[rnd + 1];
         }
         if (0 <= rnd - 1) {
-          prev = rnd - 1;
+          prev = gallery.photos[rnd - 1];
         }
 
         return {
