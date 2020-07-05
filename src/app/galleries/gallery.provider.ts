@@ -18,22 +18,13 @@ export class GalleryProvider {
 
     randomPhoto(gallery: Gallery): PhotoDisplay {
 
-        let prev;
-        let next;
-
         const rnd = Math.floor(Math.random() * gallery.photos.length);
         const hash = gallery.photos[rnd];
-        if (gallery.photos.length < rnd + 1) {
-          prev = gallery.photos[rnd + 1];
-        }
-        if (0 <= rnd - 1) {
-          prev = gallery.photos[rnd - 1];
-        }
 
         return {
           hash,
-          prev,
-          next,
+          prev: null,
+          next: null,
           photo: Photos[hash]
         }
     }

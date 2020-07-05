@@ -15,11 +15,11 @@ export class PhotoProvider {
     const index = gallery.photos.findIndex(hash => hash === photoHash);
 
     if (index + 1 < gallery.photos.length) {
-      prev = gallery.photos[index + 1];
+      next = gallery.photos[index + 1];
     }
 
     if (index - 1 >= 0) {
-      next = gallery.photos[index - 1];
+      prev = gallery.photos[index - 1];
     }
 
     return {

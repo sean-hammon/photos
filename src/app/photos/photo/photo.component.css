@@ -40,6 +40,12 @@
 .nav-gap {
   flex: 5;
 }
+.hide_nav {
+  opacity: 0;
+}
+.hide_nav:hover {
+  cursor: default;
+}
 .one {
   display: block;
 }
