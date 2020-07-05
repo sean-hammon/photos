@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from '@env';
 import { SessionStore } from '@app/store/session.store';
 import { Galleries, GalleryProvider } from '@app/galleries';
-import { Photos } from '@app/photos';
+import { PhotoProvider, PhotoDisplay } from '@app/photos';
 
 @Component({
   selector: 'app-photo',
@@ -12,11 +11,13 @@ import { Photos } from '@app/photos';
 })
 export class PhotoComponent implements OnInit, AfterViewInit {
 
+  private display: PhotoDisplay;
   @ViewChild('one') one: ElementRef;
   @ViewChild('two') two: ElementRef;
 
   constructor(
     private galleries: GalleryProvider,
+    private photos: PhotoProvider,
     private route: ActivatedRoute,
     private session: SessionStore
   ) { }
@@ -28,9 +29,10 @@ export class PhotoComponent implements OnInit, AfterViewInit {
     this.route.params
       .subscribe(p => {
         if (p.phash) {
-          const photo = Photos[p.phash];
-          this.session.setPhoto(photo);
-          this.one.nativeElement.style.backgroundImage = `url(${photo.photo})`;
+          this.display = this.photos.getPhoto(p.phash, p.ghash);
+          this.session.setPhoto(this.display.photo);
+          this.one.nativeElement.style.backgroundImage =
+            `url(${this.display.photo.photo})`;
         }
       });
   }
