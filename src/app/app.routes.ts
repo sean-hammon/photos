@@ -4,13 +4,13 @@ import { PhotoComponent } from './photos/photo/photo.component';
 
 export const ROUTES: Routes = [
     {
+      path: 'gallery/:gtitle/:ghash/photo/:ptitle/:phash',
+      component: PhotoComponent
+    },
+    {
         path: '',
         component: AppComponent,
         pathMatch: 'full'
-    },
-    {
-      path: 'gallery/:gtitle/:ghash/photo/:ptitle/:phash',
-      component: PhotoComponent
     },
     {
       path: '**',
