@@ -21,7 +21,7 @@ import { ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES, {enableTracing: false})
   ],
   providers: [],
   bootstrap: [AppComponent]
