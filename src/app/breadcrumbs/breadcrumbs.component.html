@@ -1,6 +1,6 @@
-<a href="/" class="ancestor">Home</a>
-&raquo;
-<a href="/gallery/outdoors">Travel</a>
-&middot;
-<a href="/gallery/sports">Sports</a>
-
+<ng-container *ngFor="let g of ancestors">
+    <a href="/gallery/{{g.slug}}/{{g.hash}}" class="ancestor">{{g.title}}</a> &raquo;
+</ng-container>
+<ng-container *ngFor="let g of leaves">
+    <a href="/gallery/{{g.slug}}/{{g.hash}}" class="leaf">{{g.title}}</a>
+</ng-container>

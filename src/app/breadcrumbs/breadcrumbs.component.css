@@ -12,3 +12,11 @@ a {
   text-transform: uppercase;
   color: #eedebc;
 }
+.leaf::after {
+  content: '\00b7';
+  display: inline-block;
+  margin: 0 .25rem;
+}
+.leaf:last-child::after {
+  content: '';
+}
