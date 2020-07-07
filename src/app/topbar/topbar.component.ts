@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
 export class TopbarComponent implements OnInit {
 
   pageTitle: string;
+  pageDescription: string;
 
   constructor(
     private session: SessionStore
@@ -20,6 +21,7 @@ export class TopbarComponent implements OnInit {
     .pipe(filter(photo => !!photo))
     .subscribe(p => {
       this.pageTitle = p.title;
+      this.pageDescription = p.short_desc;
     });
   }
 
