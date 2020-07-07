@@ -20,7 +20,13 @@ export const Galleries = {
             'Zzon8D',
             'dDXnlp',
             'koYhk8',
-            'JBx2Vz'
+            'JBx2Vz',
+            'YBrMpK',
+            'SD6LpE',
+            'lDYxBY',
+            'PpwVRz',
+            'i8lH2k',
+            'jzEq9z'
         ]
     },
     YBrMpK: {
