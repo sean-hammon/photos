@@ -7,8 +7,9 @@ import { Photos } from '@app/photos/photo-data';
 @Injectable({providedIn: 'root'})
 export class GalleryProvider {
 
-    childGalleries(parent: Gallery) {
-        return parent.children.map(childId => {
+    childGalleries(parent: Gallery): Gallery[] {
+        const children = parent.children as string[];
+        return children.map(childId => {
             return {...Galleries[childId]};
         });
     }
@@ -27,6 +28,6 @@ export class GalleryProvider {
           prev: null,
           next: null,
           photo: Photos[hash]
-        }
+        };
     }
 }

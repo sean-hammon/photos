@@ -23,8 +23,13 @@ export class SessionStore {
     this.photo$.next({...photo});
   }
 
-  selectGallery(id: string) {
-    const g = { ...Galleries[id] };
+  selectGallery(hash: string) {
+    const current = this.gallery$.getValue();
+    if (current && current.hash === hash) {
+      return;
+    }
+
+    const g = { ...Galleries[hash] };
     g.children = this.galleryProvider.childGalleries(g);
     this.gallery$.next(g);
   }
