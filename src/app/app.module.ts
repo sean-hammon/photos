@@ -9,6 +9,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { PhotoComponent } from './photos/photo/photo.component';
 import { ROUTES } from './app.routes';
+import { HomeComponent } from './photos/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ROUTES } from './app.routes';
     SpinnerComponent,
     TopbarComponent,
     BreadcrumbsComponent,
-    PhotoComponent
+    PhotoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
