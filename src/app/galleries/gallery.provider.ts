@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Gallery } from './gallery.interface';
-import { Galleries } from './galleries';
+import { Galleries } from './gallery-data';
 import { PhotoDisplay, Photos } from '@app/photos';
 
 @Injectable({providedIn: 'root'})

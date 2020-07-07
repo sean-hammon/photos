@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { environment } from '@env';
-import { Galleries, GalleryProvider } from '@app/galleries';
-import { Router } from '@angular/router';
+import { GalleryProvider } from '@app/galleries';
+import { Galleries } from '@app/galleries/gallery-data';
 
 @Component({
   selector: 'app-home',

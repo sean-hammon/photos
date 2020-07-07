@@ -1,9 +1,8 @@
-import { GalleryProvider } from './../galleries/gallery.provider';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Galleries } from '../galleries/galleries';
-import { Gallery } from '../galleries/gallery.interface';
-import { Photo } from '../photos/photo.interface';
+import { Galleries } from '../galleries/gallery-data';
+import { GalleryProvider, Gallery } from '@app/galleries';
+import { Photo } from '@app/photos';
 
 @Injectable({ providedIn: 'root' })
 export class SessionStore {
