@@ -10,6 +10,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { PhotoComponent } from './photos/photo/photo.component';
 import { ROUTES } from './app.routes';
 import { HomeComponent } from './photos/home/home.component';
+import { GalleryComponent } from './galleries/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './photos/home/home.component';
     TopbarComponent,
     BreadcrumbsComponent,
     PhotoComponent,
-    HomeComponent
+    HomeComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
