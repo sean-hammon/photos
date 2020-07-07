@@ -1,5 +1,6 @@
 export const Galleries = {
     i2Dsu2: {
+        hash: 'i2Dsu2',
         parent_id: '',
         title: 'Home',
         slug: 'home',
@@ -11,7 +12,7 @@ export const Galleries = {
         created_at: '2015-10-07 15:42:19',
         updated_at: '2015-10-07 15:42:19',
         children: [
-            'YbrMpk',
+            'YBrMpK',
             '1z5wB3',
         ],
         photos: [
@@ -30,6 +31,7 @@ export const Galleries = {
         ]
     },
     YBrMpK: {
+        hash: 'YBrMpK',
         parent_id: '',
         title: 'Travel',
         slug: 'travel',
@@ -52,6 +54,7 @@ export const Galleries = {
         photos: []
     },
     lByWzv: {
+        hash: 'lByWzv',
         parent_id: 'YBrMpK',
         title: 'United States',
         slug: 'united-states',
@@ -83,6 +86,7 @@ export const Galleries = {
         ],
     },
     lDYxBY: {
+        hash: 'lDYxBY',
         parent_id: 'lByWzv',
         title: 'Arizona',
         slug: 'arizona',
@@ -102,6 +106,7 @@ export const Galleries = {
         ],
     },
     Gz9Rpv: {
+        hash: 'Gz9Rpv',
         parent_id: 'lByWzv',
         title: 'Colorado',
         slug: 'colorado',
@@ -120,6 +125,7 @@ export const Galleries = {
         ],
     },
     mBA0pW: {
+        hash: 'mBA0pW',
         parent_id: 'lByWzv',
         title: 'Florida',
         slug: 'florida',
@@ -140,6 +146,7 @@ export const Galleries = {
         ],
     },
     yB47pV: {
+        hash: 'yB47pV',
         parent_id: 'lByWzv',
         title: 'Minnesota',
         slug: 'minnesota',
@@ -159,6 +166,7 @@ export const Galleries = {
         ],
     },
     KpPZDL: {
+        hash: 'KpPZDL',
         parent_id: 'lByWzv',
         title: 'Montana',
         slug: 'montana',
@@ -175,6 +183,7 @@ export const Galleries = {
         photos: []
     },
     '9pWaDW': {
+        hash: '9pWaDW',
         parent_id: 'KpPZDL',
         title: 'Glacier National Park',
         slug: 'glacier-national-park',
@@ -233,6 +242,7 @@ export const Galleries = {
         ],
     },
     kB1ozY: {
+        hash: 'kB1ozY',
         parent_id: 'lByWzv',
         title: 'Oregon',
         slug: 'oregon',
@@ -250,6 +260,7 @@ export const Galleries = {
         ],
     },
     Npm8zy: {
+        hash: 'Npm8zy',
         parent_id: 'lByWzv',
         title: 'Utah',
         slug: 'utah',
@@ -287,6 +298,7 @@ export const Galleries = {
         ],
     },
     YBrMMp: {
+        hash: 'YBrMMp',
         parent_id: 'YBrMpK',
         title: 'Austria',
         slug: 'austria',
@@ -303,6 +315,7 @@ export const Galleries = {
         photos: []
     },
     dDXlDe: {
+        hash: 'dDXlDe',
         parent_id: 'YBrMMp',
         title: 'Vienna',
         slug: 'vienna',
@@ -341,6 +354,7 @@ export const Galleries = {
         ],
     },
     VpK3pq: {
+        hash: 'VpK3pq',
         parent_id: 'YBrMpK',
         title: 'Canada',
         slug: 'canada',
@@ -357,6 +371,7 @@ export const Galleries = {
         photos: []
     },
     VpvWBQ: {
+        hash: 'VpvWBQ',
         parent_id: 'VpK3pq',
         title: 'Alberta',
         slug: 'alberta',
@@ -374,6 +389,7 @@ export const Galleries = {
         ],
     },
     YB84B9: {
+        hash: 'YB84B9',
         parent_id: 'YBrMpK',
         title: 'England',
         slug: 'england',
@@ -392,6 +408,7 @@ export const Galleries = {
         photos: []
     },
     nDd0Db: {
+        hash: 'nDd0Db',
         parent_id: 'YB84B9',
         title: 'Birmingham',
         slug: 'birmingham',
@@ -411,6 +428,7 @@ export const Galleries = {
         ],
     },
     WDgWD5: {
+        hash: 'WDgWD5',
         parent_id: 'YB84B9',
         title: 'London',
         slug: 'london',
@@ -444,6 +462,7 @@ export const Galleries = {
         ],
     },
     gpeGDP: {
+        hash: 'gpeGDP',
         parent_id: 'YB84B9',
         title: 'Lewes',
         slug: 'lewes',
@@ -465,6 +484,7 @@ export const Galleries = {
         ],
     },
     jpa2Bw: {
+        hash: 'jpa2Bw',
         parent_id: 'YBrMpK',
         title: 'Mexico',
         slug: 'mexico',
@@ -481,6 +501,7 @@ export const Galleries = {
         photos: []
     },
     eDjEBL: {
+        hash: 'eDjEBL',
         parent_id: 'jpa2Bw',
         title: 'Teotihuacan',
         slug: 'teotihuacan',
@@ -503,6 +524,7 @@ export const Galleries = {
         ],
     },
     qDqGp1: {
+        hash: 'qDqGp1',
         parent_id: 'YBrMpK',
         title: 'Netherlands',
         slug: 'netherlands',
@@ -519,6 +541,7 @@ export const Galleries = {
         photos: []
     },
     '1Dl9zY': {
+        hash: '1Dl9zY',
         parent_id: 'qDqGp1',
         title: 'Amsterdam',
         slug: 'amsterdam',
@@ -543,6 +566,7 @@ export const Galleries = {
         ],
     },
     LzLgDR: {
+        hash: 'LzLgDR',
         parent_id: 'YBrMpK',
         title: 'New Zealand',
         slug: 'new-zealand',
@@ -563,6 +587,7 @@ export const Galleries = {
         photos: [],
     },
     JBxVz1: {
+        hash: 'JBxVz1',
         parent_id: 'LzLgDR',
         title: 'Southland',
         slug: 'southland',
@@ -588,6 +613,7 @@ export const Galleries = {
         ],
     },
     '5D6LpE': {
+        hash: '5D6LpE',
         parent_id: 'LzLgDR',
         title: 'Waikato',
         slug: 'waikato',
@@ -613,6 +639,7 @@ export const Galleries = {
         ],
     },
     oBn1pr: {
+        hash: 'oBn1pr',
         parent_id: 'LzLgDR',
         title: 'Wellington',
         slug: 'wellington',
@@ -630,6 +657,7 @@ export const Galleries = {
         ],
     },
     '1z5wB3': {
+        hash: '1z5wB3',
         parent_id: '',
         title: 'Sports',
         slug: 'sports',
@@ -647,6 +675,7 @@ export const Galleries = {
         photos: []
     },
     KBQ1BZ: {
+        hash: 'KBQ1BZ',
         parent_id: '1z5wB3',
         title: 'Swimming',
         slug: 'swimming',
