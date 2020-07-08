@@ -53,9 +53,10 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.unsub$))
       .subscribe(p => {
         this.gHash = p.ghash;
+        this.session.selectGallery(p.ghash);
+
         this.display = this.photos.getPhoto(p.phash, p.ghash);
         this.session.setPhoto(this.display.photo);
-        this.session.selectGallery(p.ghash);
       });
     if (this.one) {
       this.setImageBackground();
