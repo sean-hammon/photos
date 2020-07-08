@@ -1,9 +1,9 @@
 :host {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  top: var(--site-padding);
+  bottom: var(--site-padding);
+  left: var(--site-padding);
+  right: var(--site-padding);
 }
 .photo {
   height: 100%;

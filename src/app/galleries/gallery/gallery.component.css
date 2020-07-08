@@ -1,0 +1,9 @@
+:host {
+  position: absolute;
+  top: var(--site-padding);
+  bottom: var(--site-padding);
+  left: var(--site-padding);
+  right: var(--site-padding);
+  border: 1px solid #555;
+  padding-top: var(--top-bar-height);
+}
