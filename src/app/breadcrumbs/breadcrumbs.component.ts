@@ -2,7 +2,9 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { SessionStore } from './../store/session.store';
 import { Component, OnInit } from '@angular/core';
-import { Gallery } from '../galleries/gallery.interface';
+import { Gallery } from '@app/galleries';
+import { Galleries } from '@app/galleries/gallery-data';
+import { environment } from '@env';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -15,11 +17,13 @@ export class BreadcrumbsComponent implements OnInit {
   public leaves: Gallery[];
 
   private unsub$: Subject<null>;
+  private home: Gallery;
 
   constructor(
-    private session: SessionStore
+    private session: SessionStore,
   ) {
-    this.ancestors = [];
+    this.home = Galleries[environment.homeGallery];
+    this.ancestors = [this.home];
   }
 
   ngOnInit(): void {
@@ -34,8 +38,11 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   updateCrumbs(gallery: Gallery) {
-    if (!this.ancestors.length) {
+    console.log(gallery);
+    if (gallery.hash !== environment.homeGallery) {
       this.ancestors.push(gallery);
+    } else {
+      this.ancestors = [this.home];
     }
     this.leaves = gallery.children as Gallery[];
   }
