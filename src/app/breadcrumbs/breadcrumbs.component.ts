@@ -2,9 +2,14 @@ import { takeUntil, filter } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { SessionStore } from './../store/session.store';
 import { Component, OnInit } from '@angular/core';
-import { Gallery } from '@app/galleries';
+import { Gallery, GalleryProvider } from '@app/galleries';
 import { Galleries } from '@app/galleries/gallery-data';
 import { environment } from '@env';
+
+interface GalleryLink {
+  title: string;
+  link: string[];
+}
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,8 +18,8 @@ import { environment } from '@env';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  public ancestors: Gallery[];
-  public leaves: Gallery[];
+  public ancestors: GalleryLink[];
+  public leaves: GalleryLink[];
 
   private unsub$: Subject<null>;
   private home: Gallery;
@@ -23,10 +28,14 @@ export class BreadcrumbsComponent implements OnInit {
     private session: SessionStore,
   ) {
     this.home = Galleries[environment.homeGallery];
-    this.ancestors = [this.home];
+    this.ancestors = [{
+      title: this.home.title,
+      link: ['/']
+    }];
   }
 
   ngOnInit(): void {
+    console.log('breadcrumb.onInit');
     this.unsub$ = new Subject();
 
     this.session.gallery$
@@ -40,11 +49,24 @@ export class BreadcrumbsComponent implements OnInit {
   updateCrumbs(gallery: Gallery) {
     console.log(gallery);
     if (gallery.hash !== environment.homeGallery) {
-      this.ancestors.push(gallery);
+      this.ancestors.push({
+        title: gallery.title,
+        link: ['/gallery', gallery.slug, gallery.hash]
+      });
     } else {
-      this.ancestors = [this.home];
+      this.ancestors = [{
+        title: this.home.title,
+        link: ['/']
+      }];
     }
-    this.leaves = gallery.children as Gallery[];
+    console.log(gallery.children);
+    const children = gallery.children as Gallery[];
+    this.leaves = children.map(c => {
+      return {
+        title: c.title,
+        link: ['/gallery', c.slug, c.hash]
+      };
+    });
   }
 
 }

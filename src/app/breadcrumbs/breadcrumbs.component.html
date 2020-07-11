@@ -1,6 +1,6 @@
 <ng-container *ngFor="let g of ancestors">
-    <a [routerLink]="['/gallery', g.slug, g.hash]" routerLinkActive="router-link-active" class="ancestor">{{g.title}}</a> &raquo;
+    <a [routerLink]="g.link" routerLinkActive="router-link-active" class="ancestor">{{g.title}}</a> &raquo;
 </ng-container>
 <ng-container *ngFor="let g of leaves">
-    <a [routerLink]="['/gallery', g.slug, g.hash]" routerLinkActive="router-link-active" class="leaf">{{g.title}}</a>
+    <a [routerLink]="g.link" routerLinkActive="router-link-active" class="leaf">{{g.title}}</a>
 </ng-container>
