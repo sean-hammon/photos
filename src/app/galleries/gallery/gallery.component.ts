@@ -1,8 +1,10 @@
+import { GalleryProvider } from './../gallery.provider';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Photo } from '@app/photos';
 
 @Component({
   selector: 'app-gallery',
@@ -11,13 +13,18 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class GalleryComponent implements OnInit, OnDestroy {
 
+  photos: Photo[];
+
   private unsub$: Subject<null>;
 
   constructor(
+    private galleryProvider: GalleryProvider,
     private route: ActivatedRoute,
     private router: Router,
     private session: SessionStore
-  ) { }
+  ) {
+    this.photos = [];
+  }
 
   ngOnInit(): void {
 
@@ -32,6 +39,13 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     // Initial load of component
     this.setGallery();
+
+    this.session.gallery$
+    .pipe(takeUntil(this.unsub$))
+    .subscribe(g => {
+      this.photos = this.galleryProvider.photos(g);
+      console.log(this.photos);
+    });
 
   }
 

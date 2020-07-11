@@ -15,7 +15,7 @@ export class GalleryProvider {
     }
 
     photos(gallery: Gallery) {
-        return [];
+        return gallery.photos.map(hash => Photos[hash]);
     }
 
     randomPhoto(gallery: Gallery): PhotoDisplay {
