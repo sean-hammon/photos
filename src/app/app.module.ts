@@ -11,6 +11,7 @@ import { PhotoComponent } from './photos/photo/photo.component';
 import { ROUTES } from './app.routes';
 import { HomeComponent } from './photos/home/home.component';
 import { GalleryComponent } from './galleries/gallery/gallery.component';
+import { ThumbComponent } from './galleries/thumb/thumb.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { GalleryComponent } from './galleries/gallery/gallery.component';
     BreadcrumbsComponent,
     PhotoComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    ThumbComponent
   ],
   imports: [
     BrowserModule,
