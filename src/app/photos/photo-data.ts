@@ -249,7 +249,7 @@ export const Photos = {
     gallery_id: 6,
     short_desc: 'A little guy soaking up some sun.'
   },
-  abababab: {
+  kB1ozY: {
     id: 26,
     slug: 'sky-on-fire',
     photo: 'https://phogra.sean-hammon.com/photos/c6/79/d77f82e2f98516cc26e9db9da0740eb5d55e68b192c4c6305f482201f858.jpg',
@@ -1349,7 +1349,7 @@ export const Photos = {
     gallery_id: 31,
     short_desc: null
   },
-  KKpOAaD: {
+  KpOAaD: {
     id: 143,
     slug: 'avalanche-creek-3329',
     photo: 'https://phogra.sean-hammon.com/photos/ed/11/692be9d0ca0baabfbd7986b1d1f16f2bdf87a786ec3451852095a5f63246.jpg',
