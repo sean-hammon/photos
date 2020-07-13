@@ -4,30 +4,35 @@ import { PhotoDisplay } from '@app/photos';
 import { Galleries } from './gallery-data';
 import { Photos } from '@app/photos/photo-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class GalleryProvider {
 
-    childGalleries(parent: Gallery): Gallery[] {
-        const children = parent.children as string[];
-        return children.map(childId => {
-            return {...Galleries[childId]};
-        });
-    }
+  getGallery(hash: string) {
+    return { ...Galleries[hash] };
+  }
 
-    photos(gallery: Gallery) {
-        return gallery.photos.map(hash => Photos[hash]);
-    }
+  childGalleries(parent: Gallery): Gallery[] {
+    const children = parent.children as string[];
+    return children.map(childId => {
+      return { ...Galleries[childId] };
+    });
+  }
 
-    randomPhoto(gallery: Gallery): PhotoDisplay {
+  photos(gallery: Gallery) {
+    return gallery.photos.map(hash => Photos[hash]);
+  }
 
-        const rnd = Math.floor(Math.random() * gallery.photos.length);
-        const hash = gallery.photos[rnd];
+  randomPhoto(gallery: Gallery): PhotoDisplay {
 
-        return {
-          hash,
-          prev: null,
-          next: null,
-          photo: Photos[hash]
-        };
-    }
+    const rnd = Math.floor(Math.random() * gallery.photos.length);
+    const hash = gallery.photos[rnd];
+
+    return {
+      hash,
+      prev: null,
+      next: null,
+      photo: Photos[hash]
+    };
+  }
+
 }
