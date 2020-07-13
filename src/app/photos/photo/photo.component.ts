@@ -1,4 +1,4 @@
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
@@ -30,10 +30,11 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.unsub$ = new Subject();
     this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.unsub$))
       .subscribe(event => {
-        if (event instanceof NavigationEnd) {
           this.setDisplayPhoto();
-        }
       });
     this.setDisplayPhoto();
   }
@@ -43,7 +44,6 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('photo destrory');
     this.unsub$.next();
     this.unsub$.complete();
   }

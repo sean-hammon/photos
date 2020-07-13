@@ -1,9 +1,9 @@
 import { GalleryProvider } from './../gallery.provider';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter, take } from 'rxjs/operators';
 import { Photo } from '@app/photos';
 
 @Component({
@@ -30,21 +30,26 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
     this.unsub$ = new Subject();
     this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.unsub$))
       .subscribe(event => {
         // All subsequent routes to a gallery.
-        if (event instanceof NavigationEnd) {
-          this.setGallery();
-        }
+        this.setGallery();
       });
 
     // Initial load of component
     this.setGallery();
 
     this.session.gallery$
-    .pipe(takeUntil(this.unsub$))
+    .pipe(
+      filter(gallery => !!gallery),
+      takeUntil(this.unsub$))
     .subscribe(g => {
       this.photos = this.galleryProvider.photos(g);
-      console.log(this.photos);
+      if (!this.photos.length) {
+        // look for child gallery thumbs
+      }
     });
 
   }
@@ -57,7 +62,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   setGallery() {
 
     this.route.params
-    .pipe(takeUntil(this.unsub$))
+    .pipe(take(1))
     .subscribe(p => {
       this.session.selectGallery(p.ghash);
     });
