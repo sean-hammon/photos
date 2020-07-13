@@ -12,6 +12,11 @@ a {
   text-transform: uppercase;
   color: #eedebc;
 }
+.ancestor::after {
+  display: inline-block;
+  content: '\232A';
+  margin: 0 .5rem;
+}
 .leaf::after {
   content: '\00b7';
   display: inline-block;

@@ -35,7 +35,6 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('breadcrumb.onInit');
     this.unsub$ = new Subject();
 
     this.session.gallery$
@@ -47,7 +46,6 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   updateCrumbs(gallery: Gallery) {
-    console.log(gallery);
     if (gallery.hash !== environment.homeGallery) {
       this.ancestors.push({
         title: gallery.title,
@@ -59,7 +57,6 @@ export class BreadcrumbsComponent implements OnInit {
         link: ['/']
       }];
     }
-    console.log(gallery.children);
     const children = gallery.children as Gallery[];
     this.leaves = children.map(c => {
       return {
