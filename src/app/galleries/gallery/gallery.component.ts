@@ -48,7 +48,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     .subscribe(g => {
       this.photos = this.galleryProvider.photos(g);
       if (!this.photos.length) {
-        // look for child gallery thumbs
+        this.photos = this.galleryProvider.childThumbs(g);
       }
     });
 

@@ -18,6 +18,16 @@ export class GalleryProvider {
     });
   }
 
+  childThumbs(parent: Gallery) {
+    const children = parent.children as Gallery[];
+    return children.map(child => {
+      const p = {...Photos[child.thumb]};
+      p.title = child.title;
+      return p;
+    });
+
+  }
+
   photos(gallery: Gallery) {
     return gallery.photos.map(hash => Photos[hash]);
   }
