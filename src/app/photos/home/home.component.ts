@@ -22,9 +22,8 @@ export class HomeComponent implements OnInit {
     const gallery = Galleries[environment.homeGallery];
     const display = this.galleries.randomPhoto(gallery);
     const cmd = [
-      'gallery',
-      'home', environment.homeGallery,
-      'photo', display.photo.slug, display.hash
+      'photo', display.hash, display.photo.slug,
+      'in', 'home', environment.homeGallery,
     ];
     this.router.navigate(cmd);
   }

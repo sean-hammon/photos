@@ -1,4 +1,3 @@
-import { AppComponent } from './app.component';
 import { Routes } from '@angular/router';
 import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';
@@ -6,11 +5,16 @@ import { GalleryComponent } from './galleries/gallery/gallery.component';
 
 export const ROUTES: Routes = [
     {
-      path: 'gallery/:gtitle/:ghash/photo/:ptitle/:phash',
-      component: PhotoComponent
+      path: 'photo/:phash/:pslug',
+      children: [
+        {
+          path: '**',
+          component: PhotoComponent
+        }
+      ]
     },
     {
-      path: 'gallery/:gtitle/:ghash',
+      path: 'gallery/:ghash/:gslug',
       component: GalleryComponent
     },
     {
