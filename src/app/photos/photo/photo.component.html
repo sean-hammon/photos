@@ -1,13 +1,13 @@
 <div class="__full-frame __flex-on __flex-align-vertical">
   <div class="__flex photo-nav prev"
        (click)="prevPhoto()"
-       [class.hide_nav]="!display?.prev">
+       [class.hide_nav]="!nav?.prev">
     <img src="/assets/chevron_left_2x.png">
   </div>
   <div class="nav-gap"></div>
   <div class="__flex photo-nav next"
        (click)="nextPhoto()"
-       [class.hide_nav]="!display?.next">
+       [class.hide_nav]="!nav?.next">
     <img src="/assets/chevron_right_2x.png">
   </div>
 </div>

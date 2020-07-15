@@ -1,9 +1,9 @@
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, take } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
-import { PhotoProvider, PhotoDisplay } from '@app/photos';
-import { Subject } from 'rxjs';
+import { PhotoProvider, PhotoDisplay, Photo } from '@app/photos';
+import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-photo',
@@ -12,13 +12,17 @@ import { Subject } from 'rxjs';
 })
 export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  display: PhotoDisplay;
+  nav = {
+    next: '',
+    prev: ''
+  };
 
   @ViewChild('one') one: ElementRef;
   @ViewChild('two') two: ElementRef;
 
   private gHash: string;
   private unsub$: Subject<null>;
+  private display$: BehaviorSubject<PhotoDisplay>;
 
   constructor(
     private photos: PhotoProvider,
@@ -29,6 +33,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.unsub$ = new Subject();
+    this.display$ = new BehaviorSubject(null);
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -36,11 +41,16 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(event => {
           this.setDisplayPhoto();
       });
+
     this.setDisplayPhoto();
   }
 
   ngAfterViewInit() {
-    this.setImageBackground();
+    this.display$
+      .pipe(filter(obj => !!obj))
+      .subscribe((display) => {
+        this.updateTemplate(display);
+      });
   }
 
   ngOnDestroy() {
@@ -49,35 +59,40 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDisplayPhoto() {
-    this.route.params
-      .pipe(takeUntil(this.unsub$))
-      .subscribe(p => {
-        this.gHash = p.ghash;
-        this.session.selectGallery(p.ghash);
+    const params$ = this.route.params.pipe(take(1));
+    const path$ = this.route.url.pipe(take(1));
 
-        this.display = this.photos.getPhoto(p.phash, p.ghash);
-        this.session.setPhoto(this.display.photo);
+    forkJoin([params$, path$])
+      .subscribe(([params, path]) => {
+        console.log(params, path);
+        this.gHash = path.pop().toString();
+        this.session.selectGallery(this.gHash);
+
+        const display = this.photos.getPhoto(params.phash, this.gHash);
+        this.nav = {
+          next: display.next,
+          prev: display.prev
+        };
+        this.display$.next(display);
+        this.session.setPhoto(display.photo);
       });
-    if (this.one) {
-      this.setImageBackground();
-    }
   }
 
-  setImageBackground() {
-      this.one.nativeElement.style.backgroundImage =
-        `url(${this.display.photo.photo})`;
+  updateTemplate(display: PhotoDisplay) {
+    this.one.nativeElement.style.backgroundImage =
+      `url(${display.photo.photo})`;
   }
 
   nextPhoto() {
-    if (this.display.next) {
-      const href = this.photos.makeHref(this.display.next, this.gHash);
+    if (this.nav.next) {
+      const href = this.photos.makeHref(this.nav.next, this.gHash);
       this.router.navigate(href);
     }
   }
 
   prevPhoto() {
-    if (this.display.prev) {
-      const href = this.photos.makeHref(this.display.prev, this.gHash);
+    if (this.nav.prev) {
+      const href = this.photos.makeHref(this.nav.prev, this.gHash);
       this.router.navigate(href);
     }
   }
