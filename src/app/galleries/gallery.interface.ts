@@ -2,6 +2,7 @@ export interface Gallery {
     hash: string;
     parent_id: string;
     title: string;
+    thumb: string;
     slug: string;
     node: string;
     share_key: string;
