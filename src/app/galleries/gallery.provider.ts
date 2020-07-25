@@ -30,7 +30,11 @@ export class GalleryProvider {
   }
 
   photos(gallery: Gallery) {
-    return gallery.photos.map(hash => Photos[hash]);
+    return gallery.photos.map(hash => {
+      const p = {...Photos[hash]};
+      p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.hash];
+      return p;
+    });
   }
 
   randomPhoto(gallery: Gallery): PhotoDisplay {
