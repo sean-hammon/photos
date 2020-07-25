@@ -36,7 +36,7 @@ export class PhotoProvider {
     const g = Galleries[galleryHash];
     const p = Photos[photoHash];
     return [
-      'photo', photoHash, p.slug,
+      'photo', p.slug, photoHash,
       'in', g.slug , galleryHash,
     ];
   }
