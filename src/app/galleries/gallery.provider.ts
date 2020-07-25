@@ -23,6 +23,7 @@ export class GalleryProvider {
     return children.map(child => {
       const p = {...Photos[child.thumb]};
       p.title = child.title;
+      p.route = ['/gallery', child.slug, child.hash];
       return p;
     });
 
