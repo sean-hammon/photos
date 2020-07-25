@@ -7,4 +7,18 @@
   border: 1px solid #555;
   padding-top: var(--top-bar-height);
   overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-widget) var(--scrollbar-background);
 }
+
+:host::-webkit-scrollbar {
+  width: 11px;
+}
+:host::-webkit-scrollbar-track {
+  background: var(--scrollbar-background);
+}
+:host::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-widget);
+}
+
