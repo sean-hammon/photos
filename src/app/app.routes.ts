@@ -5,7 +5,7 @@ import { GalleryComponent } from './galleries/gallery/gallery.component';
 
 export const ROUTES: Routes = [
     {
-      path: 'photo/:phash/:pslug',
+      path: 'photo/:pslug/:phash',
       children: [
         {
           path: '**',
@@ -14,7 +14,7 @@ export const ROUTES: Routes = [
       ]
     },
     {
-      path: 'gallery/:ghash/:gslug',
+      path: 'gallery/:gslug/:ghash',
       component: GalleryComponent
     },
     {
