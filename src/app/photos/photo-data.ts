@@ -5,6 +5,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/78/f1/6077d6d90dcbe95fc949b73a18c0fcbf283cd31348769ae970b1b96ed531.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/50/76/ac50f9c7791b5bab5bb52eab126aa799a4ce80661d298e6719644f465499.jpg',
     title: 'Fall Riot',
+    height: 1316,
+    width: 1980,
     long_desc: 'Found this wandering around camp while canoeing in the BWCA. There was just something about the pattern in the small leaves and the contrast of the red against the green that drew my eye.',
     gallery_id: 19,
     short_desc: 'Flaming reds in the ground cover at BWCA'
@@ -95,6 +97,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/96/f3/60db912250ccfb0409e3e51454ebf159deb39f52a32ead7ec903c4807dd4.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/37/a9/61d9e4322a5acdc119e6ebd72bcdde8b47b58d7e6fd6e8c53155e9015e1c.jpg',
     title: 'Bright Yellow',
+    height: 1320,
+    width: 1980,
     long_desc: '',
     gallery_id: 5,
     short_desc: 'A blazing arc of aspens in the Utah mountains.'
@@ -345,6 +349,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/51/fc/70e242c3a0273c25aae448e8d47991c67a5209f712227fbac81fb36f8b17.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/03/89/240d84f3776fa7210eea648cf001bf094342bd96c155e74173ee816c1264.jpg',
     title: 'The Shard',
+    height: 1320,
+    width: 1980,
     long_desc: null,
     gallery_id: 25,
     short_desc: null
@@ -555,6 +561,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/11/56/e83e2c0f50ea126797dc69055302b3225c0e2676717d17d9bc2b306273bc.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/b4/6c/b8d84c2f1a8533a406c00f73b253565800e2d862cf9ac1c9dc4d6b65f0a6.jpg',
     title: 'Hobbits Love Yellow',
+    height: 1080,
+    width: 1920,
     long_desc: null,
     gallery_id: 10,
     short_desc: null
@@ -795,6 +803,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/a8/b2/5700326a5bc4b66c2f74df6367bbe8a8c31955b6ed07791a049080c45caa.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/20/f2/3a685448c8af8260d157796b184c53edb947e9eed695f5ff5866ff7cf376.jpg',
     title: 'Milford Sound',
+    height: 1277,
+    width: 1920,
     long_desc: null,
     gallery_id: 11,
     short_desc: null
@@ -815,6 +825,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/fa/5b/21ac0677e6d2e29fe0cb917dd53dbe0f02dc90c83c1917b49266f187bf98.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/43/c3/702fdadc398fba0beb6ef5f9a6dc07685efcc284167aa172d38b892e89cb.jpg',
     title: 'Untitled',
+    height: 1080,
+    width: 1920,
     long_desc: null,
     gallery_id: 18,
     short_desc: null
@@ -835,6 +847,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/b4/e3/70d67da8e9c3d000a773c90d579d7840d9bc028fa3f1dc18476652c2a934.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/af/11/13621bd1dd6b39b10c84148ea9ddd2cdf98c70826d709c8406060847e7ad.jpg',
     title: 'Untitled',
+    height: 1080,
+    width: 1920,
     long_desc: null,
     gallery_id: 18,
     short_desc: null
@@ -945,6 +959,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/69/80/b7aed3478299b88f2b72603f0e9f473a26399edcfc40514ef595e365f07d.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/c8/14/21426729385dd48aa068106ee7580eeacfef475e90c02af4443187f0556e.jpg',
     title: 'Regency Wharf',
+    height: 1280,
+    width: 1920,
     long_desc: null,
     gallery_id: 24,
     short_desc: null
@@ -1515,6 +1531,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/e4/bf/234529a7f84a04867ba53e2195a4e6e7a1890f7cb56d1c21f44e753d2bfc.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/a0/c9/c3c5ec97eedc783b2c960ed316bb6da1296fb34212ae0bdca31cc68a7fe7.jpg',
     title: 'Cactus Flower',
+    height: 1920,
+    width: 2880,
     long_desc: null,
     gallery_id: 2,
     short_desc: null
@@ -1565,6 +1583,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/2f/79/e74a4d096e00e90fa3c7ed207086b6ea860f5b3cf4eb22d6666e2aeba795.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/e5/f8/8766ddbece734e02d620838b6bfcd74f0b14a734181a3f591a5749a44351.jpg',
     title: 'Molly\'s Castle',
+    height: 1920,
+    width: 2880,
     long_desc: null,
     gallery_id: 5,
     short_desc: null
@@ -1635,6 +1655,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/1c/d5/89b146d88574242fe0232fd803a216d4f0c81ff2c6f306c7effe6e055255.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/db/1f/91f1aff7a8147326ba43b3b2fd557ddba1f3e52e7516a694a978645d574e.jpg',
     title: 'Sunset at Dead Horse Point',
+    height: 1920,
+    width: 2880,
     long_desc: null,
     gallery_id: 5,
     short_desc: null
@@ -1705,6 +1727,8 @@ export const Photos = {
     photo: 'https://phogra.sean-hammon.com/photos/86/8b/764434af8c3d027d6e0fce20d51b63fd0d25503ad603371b0b03bfc825f0.jpg',
     thumb: 'https://phogra.sean-hammon.com/photos/0a/63/fc93f95e273065ac6e5e605a73961a0002b39b1d1a5fcd6f982a174bbcd4.jpg',
     title: 'Monument to Richard Strauss in Stadtpark',
+    height: 1280,
+    width: 1920,
     long_desc: null,
     gallery_id: 40,
     short_desc: null
