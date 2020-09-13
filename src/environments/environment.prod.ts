@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  homeGallery: 'i2Dsu2'
 };
