@@ -1,7 +1,7 @@
 import { SessionStore } from '@app/store/session.store';
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
