@@ -80,7 +80,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateTemplate(display: PhotoDisplay) {
     this.one.nativeElement.style.backgroundImage =
-      `url(${display.photo.photo})`;
+      `url(${display.photo.photo.file})`;
   }
 
   nextPhoto() {

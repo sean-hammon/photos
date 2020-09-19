@@ -23,8 +23,7 @@ export class ThumbComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.table(this.item);
-    this.imgUrl = `url(${this.item.thumb})`;
+    this.imgUrl = `url(${this.item.thumb.file})`;
     this.title = this.item.title;
     this.route = this.item.route;
   }
