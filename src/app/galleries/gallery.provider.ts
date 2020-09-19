@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Gallery } from './gallery.interface';
-import { PhotoDisplay } from '@app/photos';
+import {Photo, PhotoDisplay} from '@app/photos';
 import { Galleries } from './gallery-data';
 import { Photos } from '@app/photos/photo-data';
 
@@ -13,15 +13,30 @@ export class GalleryProvider {
 
   childGalleries(parent: Gallery): Gallery[] {
     const children = parent.children as string[];
-    return children.map(childId => {
-      return { ...Galleries[childId] };
-    });
+    return children
+      .map(childId => {
+        return { ...Galleries[childId] };
+      })
+      .filter(child => !!child.title);
   }
 
   childThumbs(parent: Gallery) {
-    const children = parent.children as Gallery[];
+    let children;
+    if (typeof parent.children[0] === 'string') {
+      children = this.childGalleries(parent);
+    } else {
+      children = parent.children as Gallery[];
+    }
     return children.map(child => {
-      const p = {...Photos[child.thumb]};
+      let p: Photo;
+      if (child.photos.length) {
+        const r = Math.floor(Math.random() * child.photos.length);
+        const hash = child.photos[r];
+        p  = {...Photos[hash]};
+      } else {
+        p = this.childThumbs(child)[0];
+      }
+
       p.title = child.title;
       p.route = ['/gallery', child.slug, child.hash];
       return p;
