@@ -1,3 +1,6 @@
+import {ThumbData} from "@app/photos/thumb-data.interface";
+import {PhotoData} from "@app/photos/photo-data.interface";
+
 export interface Photo {
   id: number;
   title: string;
@@ -8,6 +11,6 @@ export interface Photo {
   height: number;
   width: number;
   route: string[];
-  thumb: string;
-  photo: string;
+  thumb: ThumbData;
+  photo: PhotoData;
 }
