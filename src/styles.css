@@ -58,3 +58,6 @@ body {
 .__flex-align-vertical {
   align-items: center;
 }
+.__click-through {
+  pointer-events: none;
+}

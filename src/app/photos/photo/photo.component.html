@@ -1,4 +1,4 @@
-<div class="__full-frame __flex-on __flex-align-vertical">
+<div class="__full-frame __flex-on __flex-align-vertical __click-through">
   <div class="__flex photo-nav prev"
        (click)="prevPhoto()"
        [class.hide_nav]="!nav?.prev">
@@ -11,5 +11,8 @@
     <img src="/assets/chevron_right_2x.png">
   </div>
 </div>
-<div #one class='photo one'></div>
+<div #one
+     (mousedown)="onMouseDown($event)"
+     (mouseup)="onMouseUp()"
+     class='photo one'></div>
 <div #two class='photo two'></div>

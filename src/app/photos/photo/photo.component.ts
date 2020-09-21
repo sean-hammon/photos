@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { PhotoProvider, PhotoDisplay, Photo } from '@app/photos';
 import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
+import {PhotoUxHelper} from "@app/photos/photo-ux.helper";
 
 @Component({
   selector: 'app-photo',
@@ -24,11 +25,14 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsub$: Subject<null>;
   private display$: BehaviorSubject<PhotoDisplay>;
 
+  private isDragging: boolean;
+
   constructor(
     private photos: PhotoProvider,
     private route: ActivatedRoute,
     private router: Router,
-    private session: SessionStore
+    private session: SessionStore,
+    private uxHelper: PhotoUxHelper
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +55,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((display) => {
         this.updateTemplate(display);
       });
+    this.one.nativeElement.addEventListener('mousedown', (ev) => console.log(ev));
   }
 
   ngOnDestroy() {
@@ -64,7 +69,6 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
     forkJoin([params$, path$])
       .subscribe(([params, path]) => {
-        console.log(params, path);
         this.gHash = path.pop().toString();
         this.session.selectGallery(this.gHash);
 
@@ -97,4 +101,20 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onMouseUp() {
+    if (this.isDragging) {
+      this.uxHelper.stopDrag();
+    }
+    this.isDragging = false;
+  }
+
+  onMouseDown(event: MouseEvent) {
+    this.isDragging = true;
+    let direction = 'ns';
+    const current = this.display$.getValue();
+    if (current.photo.width > current.photo.height) {
+      direction = 'ew';
+    }
+    this.uxHelper.startDrag(direction, event);
+  }
 }
