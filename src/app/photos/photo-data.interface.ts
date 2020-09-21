@@ -1,7 +1,6 @@
 export interface PhotoData {
   height: number;
   width: number;
-  top: number;
-  left: number;
+  offset: number;
   file: string;
 }
