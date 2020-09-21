@@ -1,5 +1,5 @@
-import {ThumbData} from "@app/photos/thumb-data.interface";
-import {PhotoData} from "@app/photos/photo-data.interface";
+import {ThumbData} from '@app/photos/thumb-data.interface';
+import {PhotoData} from '@app/photos/photo-data.interface';
 
 export interface Photo {
   id: number;
