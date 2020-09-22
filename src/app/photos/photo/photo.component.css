@@ -26,13 +26,24 @@
   background-color: rgba(110, 110, 110, 0.25);
   cursor: pointer;
 }
+.photo-nav img {
+  height: 48px;
+}
 .photo-nav.prev {
   left: 0;
   right: 90%;
 }
+.photo-nav.prev img{
+  -webkit-filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, .6));
+  filter: drop-shadow(-1px 3px 2px rgba(0, 0, 0, .8));
+}
 .photo-nav.next {
   right: 0;
   left: 90%;
+}
+.photo-nav.next img {
+  -webkit-filter: drop-shadow(5px 5px 8px rgba(0, 0, 0, .6));
+  filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, .8));
 }
 .hide_nav {
   opacity: 0;
