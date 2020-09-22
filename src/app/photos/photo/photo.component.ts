@@ -55,7 +55,6 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((display) => {
         this.updateTemplate(display);
       });
-    this.one.nativeElement.addEventListener('mousedown', (ev) => console.log(ev));
   }
 
   ngOnDestroy() {
@@ -116,7 +115,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isDragging = true;
     let direction = 'ns';
     const current = this.display$.getValue();
-    if (current.photo.width > current.photo.height) {
+    if (current.photo.photo.width > current.photo.photo.height) {
       direction = 'ew';
     }
     this.uxHelper.startDrag(direction, event);
