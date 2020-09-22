@@ -4,10 +4,10 @@
   bottom: var(--site-padding);
   left: var(--site-padding);
   right: var(--site-padding);
+  overflow: hidden;
 }
 .photo {
-  height: 100%;
-  width: 100%;
+  position: absolute;
   z-index: -1;
   background-size: cover;
   background-position: center;
