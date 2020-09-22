@@ -8,13 +8,14 @@
 }
 .photo {
   position: absolute;
-  z-index: -1;
   background-size: cover;
   background-position: center;
   border: 1px solid var(--color-border);
 }
 .photo-nav {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -26,19 +27,12 @@
   cursor: pointer;
 }
 .photo-nav.prev {
-  align-items: flex-start;
-}
-.photo-nav.prev img {
-  margin-left: 2em;
+  left: 0;
+  right: 90%;
 }
 .photo-nav.next {
-  align-items: flex-end;
-}
-.photo-nav.next img {
-  margin-right: 2em;
-}
-.nav-gap {
-  flex: 5;
+  right: 0;
+  left: 90%;
 }
 .hide_nav {
   opacity: 0;
