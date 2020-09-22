@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {fromEvent, Subject, timer} from 'rxjs';
 import {debounce, takeUntil} from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
+import {SafeStyle} from "@angular/platform-browser";
 
 interface ImageStyles {
   backgroundImage: string;
@@ -81,10 +82,7 @@ export class PhotoUxHelper {
 
       top = Math.round((winH - imgH) / 2);
       if (file.offset != null) {
-        top =  -(imgH * file.offset / 100);
-        if (top < winH - imgH) {
-          top = winH - imgH;
-        }
+        top = file.offset;
       }
 
       styles.top = `${top}px`;
@@ -96,10 +94,7 @@ export class PhotoUxHelper {
 
       left = Math.round((winW - imgW) / 2);
       if (file.offset != null) {
-        left =  -(imgW * file.offset / 100);
-        if (left > winW - imgW) {
-          left = winW - imgW;
-        }
+        left = file.offset;
       }
 
       styles.left = `${left}px`;
