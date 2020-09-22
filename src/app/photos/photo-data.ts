@@ -3292,7 +3292,7 @@ export const Photos = {
     photo: {
       height: 2880,
       width: 1920,
-      offset: null,
+      offset: -220,
       url: 'https://phogra.sean-hammon.com/photos/b1/20/566eb7b8fa2e5a7d8b59065d88a4a6019633b1e1ebe2b231ca8dbb519a30.jpg'
     },
     thumb: {
