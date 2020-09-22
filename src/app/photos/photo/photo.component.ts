@@ -83,8 +83,12 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateTemplate(display: PhotoDisplay) {
-    this.one.nativeElement.style.backgroundImage =
-      `url(${display.photo.photo.file})`;
+    const styles = this.uxHelper.coverScreen(display.photo);
+    for (const key in styles) {
+      if (styles.hasOwnProperty(key)){
+        this.one.nativeElement.style[key] = styles[key];
+      }
+    }
   }
 
   nextPhoto() {
