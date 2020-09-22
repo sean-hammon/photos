@@ -27,7 +27,8 @@
   cursor: pointer;
 }
 .photo-nav img {
-  height: 48px;
+  height: 56px;
+  opacity: 0.6;
 }
 .photo-nav.prev {
   left: 0;
