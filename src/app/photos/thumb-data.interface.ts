@@ -1,3 +1,3 @@
 export interface ThumbData {
-  file: string;
+  url: string;
 }
