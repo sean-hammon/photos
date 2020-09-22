@@ -102,7 +102,6 @@ export class PhotoUxHelper {
 
     }
 
-    console.log(styles);
     return styles;
   }
 
