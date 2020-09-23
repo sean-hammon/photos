@@ -91,7 +91,10 @@ export class PhotoUxHelper {
       backgroundImage: `url(${file.url})`,
       height : `${imgH}px`,
       width: `${imgW}px`,
+      top: '0',
+      left: '0'
     };
+
     //  Landscape
     if ( imgRatio <= 1 ) {
 
