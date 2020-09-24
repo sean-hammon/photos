@@ -1,8 +1,8 @@
 export const Galleries = {
   PwOelGZl: {
     children: [
-      'prakPZxm',
       'DYZwvazB',
+      'prakPZxm',
     ],
     photos: [
       'zjOYBEBq',
