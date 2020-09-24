@@ -2912,7 +2912,7 @@ export const Photos = {
     photo: {
       height: 2880,
       width: 1920,
-      offset: 40,
+      offset: 35,
       url: 'https://phogra.sean-hammon.com/photos/48/de/3d126e1f89039571d388e4f1ccd9be6c2a602314ca3e873816d5466b1c95.jpg'
     },
     thumb: {
@@ -2932,7 +2932,7 @@ export const Photos = {
     photo: {
       height: 2880,
       width: 1920,
-      offset: 0,
+      offset: 5,
       url: 'https://phogra.sean-hammon.com/photos/4f/2a/2a6b369dd69d4bb71fa8777d8942bcc9051305b9120fc50819dcc858df95.jpg'
     },
     thumb: {
@@ -2952,7 +2952,7 @@ export const Photos = {
     photo: {
       height: 1920,
       width: 9397,
-      offset: 0,
+      offset: null,
       url: 'https://phogra.sean-hammon.com/photos/8b/ab/60f793680dadfe3e5ee4d4fdadcd2c5bb79bc18352b23ca9ebf6452e3f04.jpg'
     },
     thumb: {
@@ -3232,7 +3232,7 @@ export const Photos = {
     photo: {
       height: 2888,
       width: 1920,
-      offset: null,
+      offset: 20,
       url: 'https://phogra.sean-hammon.com/photos/c3/8c/93b18de3dd7dfb38c1f8e944ee723206ca605fa328605f4d358c421f6775.jpg'
     },
     thumb: {
@@ -3712,7 +3712,7 @@ export const Photos = {
     photo: {
       height: 2880,
       width: 1920,
-      offset: 36,
+      offset: 40,
       url: 'https://phogra.sean-hammon.com/photos/eb/ab/1a60cff6115ea32f5dd697d9de375758d9fddede24b8ac74c60ea4c2d568.jpg'
     },
     thumb: {
@@ -3732,7 +3732,7 @@ export const Photos = {
     photo: {
       height: 1080,
       width: 5379,
-      offset: 70,
+      offset: 50,
       url: 'https://phogra.sean-hammon.com/photos/e1/9e/0b598aa0732811fefff960530bfe8da115c7da20e33afd6de8b28569b095.jpg'
     },
     thumb: {
