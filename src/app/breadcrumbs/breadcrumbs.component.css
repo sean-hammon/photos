@@ -17,11 +17,15 @@ a {
   content: '\232A';
   margin: 0 .5rem;
 }
+.ancestor.last {
+  font-weight: 600;
+  color: #fff0ce;
+}
 .leaf::after {
   content: '\00b7';
   display: inline-block;
   margin: 0 .25rem;
 }
-.leaf:last-child::after {
+a:last-child::after {
   content: '';
 }

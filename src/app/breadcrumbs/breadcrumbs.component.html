@@ -1,5 +1,9 @@
-<ng-container *ngFor="let g of ancestors">
-    <a [routerLink]="g.link" routerLinkActive="active-crumb" class="ancestor">{{g.title}}</a>
+<ng-container *ngFor="let g of ancestors; last as lastOne">
+    <a [routerLink]="g.link"
+      routerLinkActive="active-crumb"
+      class="ancestor"
+      [class.last]=lastOne
+    >{{g.title}}</a>
 </ng-container>
 <ng-container *ngFor="let g of leaves">
     <a [routerLink]="g.link" class="leaf">{{g.title}}</a>
