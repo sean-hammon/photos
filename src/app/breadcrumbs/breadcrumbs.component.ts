@@ -30,11 +30,7 @@ export class BreadcrumbsComponent implements OnInit {
     private galleryProvider: GalleryProvider
   ) {
     this.home = Galleries[environment.homeGallery];
-    this.ancestors = [{
-      title: this.home.title,
-      hash: environment.homeGallery,
-      link: ['/']
-    }];
+    this.ancestors = [];
   }
 
   ngOnInit(): void {
@@ -49,9 +45,9 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   updateCrumbs(gallery: Gallery) {
-    if (gallery.hash !== environment.homeGallery) {
+    if (gallery.hash !== this.home.hash) {
       const inPath = this.ancestors.findIndex(g => g.hash === gallery.hash);
-      if (this.ancestors.length > 0 || inPath >= 0) {
+      if (this.ancestors.length > 0) {
         // Regular gallery navigation
         this.updateAncestors(gallery, inPath);
       } else {
@@ -61,7 +57,7 @@ export class BreadcrumbsComponent implements OnInit {
     } else {
       this.ancestors = [{
         title: this.home.title,
-        hash: environment.homeGallery,
+        hash: this.home.hash,
         link: ['/']
       }];
     }
@@ -98,16 +94,15 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   rebuildAncestors(gallery: Gallery) {
+
     let g = { ...gallery };
-    console.log('rebuild', gallery);
     this.addAncestor(g);
     do {
 
       g = this.galleryProvider.getGallery(g.parent_id);
-      console.log(g);
       this.addAncestor(g);
 
-    } while (g.parent_id !== environment.homeGallery);
+    } while (g.parent_id !== null);
   }
 
   addAncestor(gallery: Gallery) {
