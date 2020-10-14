@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {fromEvent, Subject, timer} from 'rxjs';
-import {debounce, takeUntil} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { fromEvent, Subject, timer } from 'rxjs';
+import { debounce, takeUntil } from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
-import {SafeStyle} from '@angular/platform-browser';
+import { SafeStyle } from '@angular/platform-browser';
 
 interface ImageStyles {
   backgroundImage: string;
@@ -13,7 +13,7 @@ interface ImageStyles {
   cursor?: string;
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PhotoUxHelper {
 
   private cancel$ = new Subject<boolean>();
@@ -89,21 +89,21 @@ export class PhotoUxHelper {
 
     const styles: ImageStyles = {
       backgroundImage: `url(${file.url})`,
-      height : `${imgH}px`,
+      height: `${imgH}px`,
       width: `${imgW}px`,
       top: '0',
       left: '0'
     };
 
     //  Landscape
-    if ( imgRatio <= 1 ) {
+    if (imgRatio <= 1) {
 
       const center = Math.round((winH - imgH) / 2);
       if (file.offset != null) {
         top = center - (imgH * file.offset / 100) + (winH / 2);
         if (top > 0) {
           top = 0;
-        } else  if (top < winH - imgH) {
+        } else if (top < winH - imgH) {
           top = winH - imgH;
         }
       }
@@ -113,12 +113,12 @@ export class PhotoUxHelper {
     }
 
     //  Portrait
-    if (imgRatio > 1 ) {
+    if (imgRatio > 1) {
 
       const center = Math.round((winW - imgW) / 2);
       if (file.offset != null) {
-        left = center - (imgW * file.offset / 100) + (winW /2);
-        if (left > 0 ) {
+        left = center - (imgW * file.offset / 100) + (winW / 2);
+        if (left > 0) {
           left = 0;
         } else if (left < winW - imgW) {
           left = winW - imgW;
@@ -165,7 +165,7 @@ export class PhotoUxHelper {
       if (newLeft > 0) {
         newLeft = 0;
       } else if (newLeft < this.minLeft) {
-        newLeft = this. minLeft;
+        newLeft = this.minLeft;
       }
 
       this.target.style.left = newLeft + 'px';
