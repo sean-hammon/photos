@@ -5,19 +5,19 @@
 }
 
 .spinner {
-  position: fixed;
-  top: 25%;
-  left: 48%;
+  position: absolute;
+  top: calc(50% - var(--spinner-size) / 2);
+  left: calc(50% - var(--spinner-size) / 2)
 }
 
 /* https://github.com/tobiasahlin/SpinKit */
 .sk-folding-cube {
   opacity: 0.5;
-  width: 40px;
-  height: 40px;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
   -webkit-transform: rotateZ(45deg);
   transform: rotateZ(45deg);
-  margin: 15% auto;
+
 }
 
 .sk-folding-cube .sk-cube {

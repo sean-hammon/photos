@@ -1,8 +1,5 @@
-import { SessionStore } from './../../store/session.store';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { animate, transition, trigger, state, style } from '@angular/animations';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-spinner',
@@ -22,41 +19,23 @@ import { takeUntil } from 'rxjs/operators';
   ]
 
 })
-export class SpinnerComponent implements OnInit, OnDestroy {
+export class SpinnerComponent {
 
   loading: string;
-  display: boolean;
-  unsub$: Subject<boolean>;
+  private visible: boolean;
 
-  constructor(
-    private session: SessionStore
-  ) {
-    this.display = true;
+  @Input() set display(value: boolean) {
+    this.visible = value;
   }
 
-  ngOnInit() {
-
-    this.unsub$ = new Subject();
-    this.session.loading$
-      .pipe(
-        takeUntil(this.unsub$)
-      )
-      .subscribe(loading => {
-        this.loading = loading ? 'visible' : 'hidden';
-        this.display = true;
-      });
-
+  get display() {
+    return this.visible;
   }
 
-
-  ngOnDestroy() {
-    this.unsub$.next(true);
-    this.unsub$.complete();
-  }
-
+  constructor() { }
 
   animationDone($event) {
-    this.display = false;
+    // this.display = false;
   }
 
 }
