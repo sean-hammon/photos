@@ -11,6 +11,7 @@ export class ThumbComponent implements OnInit {
 
   title: string;
   route: string[];
+  loading: boolean;
 
   @Input() item: Photo;
   @HostBinding('style.background-image') imgUrl: string;
@@ -20,10 +21,18 @@ export class ThumbComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) { }
+  ) {
+    this.loading = true;
+   }
 
   ngOnInit(): void {
-    this.imgUrl = `url(${this.item.thumb.url})`;
+    const thumb = new Image();
+    thumb.onload = () => {
+      this.loading = false;
+      this.imgUrl = `url(${this.item.thumb.url})`;
+    };
+    thumb.src = this.item.thumb.url;
+
     this.title = this.item.title;
     this.route = this.item.route;
   }
