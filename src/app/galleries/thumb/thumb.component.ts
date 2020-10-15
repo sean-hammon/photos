@@ -35,12 +35,12 @@ export class ThumbComponent implements OnInit, AfterViewInit {
     const img = new Image();
     img.onload = () => {
       this.loading = false;
-      this.thumb.nativeElement.style.backgroundImage = `url(${this.item.thumb.file})`;
+      this.thumb.nativeElement.style.backgroundImage = `url(${this.item.thumb.href})`;
     };
     img.onerror = (err: ErrorEvent) => {
       console.log(img.src + ' failed: ' + err.message);
     };
-    img.src = this.item.thumb.file;
+    img.src = this.item.thumb.href;
   }
 
 }

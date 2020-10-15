@@ -88,7 +88,7 @@ export class PhotoUxHelper {
     }
 
     const styles: ImageStyles = {
-      backgroundImage: `url(${file.url})`,
+      backgroundImage: `url(${file.href})`,
       height: `${imgH}px`,
       width: `${imgW}px`,
       top: '0',
