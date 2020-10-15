@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Photo } from '@app/photos';
 import { Router } from '@angular/router';
 
@@ -7,14 +7,15 @@ import { Router } from '@angular/router';
   templateUrl: './thumb.component.html',
   styleUrls: ['./thumb.component.css']
 })
-export class ThumbComponent implements OnInit {
+export class ThumbComponent implements OnInit, AfterViewInit {
 
   title: string;
   route: string[];
   loading: boolean;
 
   @Input() item: Photo;
-  @HostBinding('style.background-image') imgUrl: string;
+  @ViewChild('thumb') thumb: ElementRef;
+
   @HostListener('click') thumbClick(event) {
     this.router.navigate(this.route);
   }
@@ -23,18 +24,23 @@ export class ThumbComponent implements OnInit {
     private router: Router
   ) {
     this.loading = true;
-   }
+  }
 
   ngOnInit(): void {
-    const thumb = new Image();
-    thumb.onload = () => {
-      this.loading = false;
-      this.imgUrl = `url(${this.item.thumb.url})`;
-    };
-    thumb.src = this.item.thumb.url;
-
     this.title = this.item.title;
     this.route = this.item.route;
+  }
+
+  ngAfterViewInit(): void {
+    const img = new Image();
+    img.onload = () => {
+      this.loading = false;
+      this.thumb.nativeElement.style.backgroundImage = `url(${this.item.thumb.file})`;
+    };
+    img.onerror = (err: ErrorEvent) => {
+      console.log(img.src + ' failed: ' + err.message);
+    };
+    img.src = this.item.thumb.file;
   }
 
 }
