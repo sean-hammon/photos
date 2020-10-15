@@ -1,8 +1,13 @@
 <div #one
      (mousedown)="onMouseDown($event)"
      (mouseup)="onMouseUp()"
+     [@fadeState]="fadeStates.one"
      class='photo one'></div>
-<div #two class='photo two'></div>
+<div #two
+     (mousedown)="onMouseDown($event)"
+     (mouseup)="onMouseUp()"
+     [@fadeState]="fadeStates.two"
+     class='photo two'></div>
 
 <div class="photo-nav prev"
        (click)="prevPhoto()"

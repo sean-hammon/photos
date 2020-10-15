@@ -53,8 +53,8 @@
   cursor: default;
 }
 .one {
-  display: block;
+  opacity: 0;
 }
 .two {
-  display: none;
+  opacity: 0;
 }

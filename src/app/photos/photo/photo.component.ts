@@ -1,15 +1,19 @@
 import { takeUntil, filter, take } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { SessionStore } from '@app/store/session.store';
-import { PhotoProvider, PhotoDisplay, Photo } from '@app/photos';
 import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
-import {PhotoUxHelper} from "@app/photos/photo-ux.helper";
+import { SessionStore } from '@app/store/session.store';
+import { PhotoProvider, PhotoDisplay } from '@app/photos';
+import {PhotoUxHelper} from '@app/photos/photo-ux.helper';
+import { fadeAnimation } from '@app/fade.animation';
 
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
-  styleUrls: ['./photo.component.css']
+  styleUrls: ['./photo.component.css'],
+  animations: [
+    fadeAnimation
+  ]
 })
 export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -17,6 +21,11 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     next: '',
     prev: ''
   };
+  fadeStates: {
+    one: string,
+    two: string
+  };
+  activeChild: string;
 
   @ViewChild('one') one: ElementRef;
   @ViewChild('two') two: ElementRef;
@@ -33,7 +42,12 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private session: SessionStore,
     private uxHelper: PhotoUxHelper
-  ) { }
+  ) {
+    this.fadeStates = {
+      one: 'hidden',
+      two: 'hidden'
+    };
+  }
 
   ngOnInit(): void {
     this.unsub$ = new Subject();
@@ -53,7 +67,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.display$
       .pipe(filter(obj => !!obj))
       .subscribe((display) => {
-        this.updateTemplate(display);
+        this.preloadImage(display);
       });
   }
 
@@ -81,13 +95,30 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  preloadImage(photo: PhotoDisplay) {
+    const img = new Image();
+    img.onload = () => this.updateTemplate(photo);
+    img.onerror = (err: ErrorEvent) => console.log(photo.photo.photo.href + ': ' + err.message);
+    img.src = photo.photo.photo.href;
+  }
+
   updateTemplate(display: PhotoDisplay) {
+    if (this.activeChild === 'one') {
+      this.activeChild = 'two';
+    } else {
+      this.activeChild = 'one';
+    }
+
     const styles = this.uxHelper.coverScreen(display.photo);
     for (const key in styles) {
       if (styles.hasOwnProperty(key)){
-        this.one.nativeElement.style[key] = styles[key];
+        this[this.activeChild].nativeElement.style[key] = styles[key];
       }
     }
+
+    const lastChild = this.activeChild === 'one' ? 'two' : 'one';
+    this.fadeStates[this.activeChild] = 'visible';
+    this.fadeStates[lastChild] = 'hidden';
   }
 
   nextPhoto() {
