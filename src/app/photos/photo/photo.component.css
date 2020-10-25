@@ -1,4 +1,7 @@
 :host {
+
+  --spinner-size: 45px;
+
   position: absolute;
   top: var(--site-padding);
   bottom: var(--site-padding);

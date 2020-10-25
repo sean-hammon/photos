@@ -1,7 +1,7 @@
 .spinner-bg {
   background-image: url("/assets/spinner-tile.png");
   background-repeat: repeat;
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 .spinner {

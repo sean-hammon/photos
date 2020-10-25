@@ -25,6 +25,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     one: string,
     two: string
   };
+  loading: boolean;
   activeChild: string;
 
   @ViewChild('one') one: ElementRef;
@@ -43,6 +44,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     private session: SessionStore,
     private uxHelper: PhotoUxHelper
   ) {
+    this.loading = true;
     this.fadeStates = {
       one: 'hidden',
       two: 'hidden'
@@ -77,6 +79,9 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setDisplayPhoto() {
+
+    this.loading = true;
+
     const params$ = this.route.params.pipe(take(1));
     const path$ = this.route.url.pipe(take(1));
 
@@ -119,6 +124,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     const lastChild = this.activeChild === 'one' ? 'two' : 'one';
     this.fadeStates[this.activeChild] = 'visible';
     this.fadeStates[lastChild] = 'hidden';
+    this.loading = false;
   }
 
   nextPhoto() {
