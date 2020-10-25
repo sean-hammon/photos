@@ -39,8 +39,8 @@ export class PhotoUxHelper {
     this.target = ev.target as HTMLElement;
     this.initialTransition = this.target.style.transition;
     this.target.style.transition = 'none';
-    this.initialLeft = parseInt(this.target.style.left, 10);
-    this.initialTop = parseInt(this.target.style.top, 10);
+    this.initialLeft = parseInt(this.target.style.left, 10) || 0;
+    this.initialTop = parseInt(this.target.style.top, 10) || 0;
 
     let winH, winW;
     [winH, winW] = this.getWindowDimension();
@@ -76,11 +76,15 @@ export class PhotoUxHelper {
     imgRatio = imgW / imgH;
     viewRatio = winW / winH;
     if (imgRatio > viewRatio) {
-      //  Screen is longer than the photo, relative to the height.
+
+      //  Screen is taller than the photo, relative to the width.
+
       imgH = winH;
       imgW = Math.round(winH * imgRatio);
 
     } else {
+
+      //  Screen is wider than the photo, relative to the height.
 
       imgW = winW;
       imgH = Math.round(winW / imgRatio);
@@ -98,23 +102,6 @@ export class PhotoUxHelper {
     //  Landscape
     if (imgRatio <= 1) {
 
-      const center = Math.round((winH - imgH) / 2);
-      if (file.offset != null) {
-        top = center - (imgH * file.offset / 100) + (winH / 2);
-        if (top > 0) {
-          top = 0;
-        } else if (top < winH - imgH) {
-          top = winH - imgH;
-        }
-      }
-
-      styles.top = `${top}px`;
-      styles.cursor = 'ns-resize';
-    }
-
-    //  Portrait
-    if (imgRatio > 1) {
-
       const center = Math.round((winW - imgW) / 2);
       if (file.offset != null) {
         left = center - (imgW * file.offset / 100) + (winW / 2);
@@ -126,7 +113,31 @@ export class PhotoUxHelper {
       }
 
       styles.left = `${left}px`;
-      styles.cursor = 'ew-resize';
+      styles.cursor = 'default';
+      if (imgW - winW > 50) {
+        styles.cursor = 'ew-resize';
+      }
+    }
+
+    //  Portrait
+    if (imgRatio > 1) {
+
+      const center = Math.round((winH - imgH) / 2);
+      top = center /2;
+      if (file.offset != null) {
+        top = center - (imgH * file.offset / 100) + (winH / 2);
+        if (top > 0) {
+          top = 0;
+        } else if (top < winH - imgH) {
+          top = winH - imgH;
+        }
+      }
+
+      styles.top = `${top}px`;
+      styles.cursor = 'default';
+      if (imgH - winH > 50) {
+        styles.cursor = 'ns-resize';
+      }
 
     }
 
