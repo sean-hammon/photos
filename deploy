@@ -1,0 +1,1 @@
+rsync -vrzP --delete --exclude=".well-known" dist/photos/. photos:~/sean-hammon.com/www/.
