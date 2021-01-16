@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { GalleryMap } from '@app/galleries/gallery-map.interface';
+import { GalleryService } from '@app/galleries/gallery.service';
+import { tap } from 'rxjs/operators';
 import { Gallery } from './gallery.interface';
 import {Photo, PhotoDisplay} from '@app/photos';
 import { Photos } from '@app/photos/photo-data';
@@ -6,6 +9,18 @@ import { Photos } from '@app/photos/photo-data';
 @Injectable({ providedIn: 'root' })
 export class GalleryProvider {
 
+  private galleryData: GalleryMap;
+
+  constructor(
+    private service: GalleryService
+  ) { }
+
+  initializeGalleries() {
+    return this.service.loadGalleries()
+      .pipe(
+        tap(galleries => this.galleryData = galleries)
+      );
+  }
   getGallery(hash: string) {
     return { ...Galleries[hash] };
   }

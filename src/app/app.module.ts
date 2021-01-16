@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { GalleryProvider } from '@app/galleries';
 import { GalleryService } from '@app/galleries/gallery.service';
+import { galleryInitializer } from '@app/intializer.factories';
 
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
@@ -33,7 +35,14 @@ import { ThumbComponent } from './galleries/thumb/thumb.component';
     RouterModule.forRoot(ROUTES, {enableTracing: false})
   ],
   providers: [
-    GalleryService
+    GalleryProvider,
+    GalleryService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: galleryInitializer,
+      deps: [GalleryProvider],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
