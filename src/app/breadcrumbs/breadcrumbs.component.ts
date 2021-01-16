@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { SessionStore } from './../store/session.store';
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryProvider } from '@app/galleries';
-import { Galleries } from '@app/galleries/gallery-data';
 import { environment } from '@env';
 
 interface GalleryLink {
@@ -27,9 +26,9 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor(
     private session: SessionStore,
-    private galleryProvider: GalleryProvider
+    private galleries: GalleryProvider
   ) {
-    this.home = Galleries[environment.homeGallery];
+    this.home = this.galleries.getGallery(environment.homeGallery);
     this.ancestors = [];
   }
 
@@ -99,7 +98,7 @@ export class BreadcrumbsComponent implements OnInit {
     this.addAncestor(g);
     do {
 
-      g = this.galleryProvider.getGallery(g.parent_id);
+      g = this.galleries.getGallery(g.parent_id);
       this.addAncestor(g);
 
     } while (g.parent_id !== null);

@@ -21,15 +21,16 @@ export class GalleryProvider {
         tap(galleries => this.galleryData = galleries)
       );
   }
+
   getGallery(hash: string) {
-    return { ...Galleries[hash] };
+    return {...this.galleryData[hash]};
   }
 
   childGalleries(parent: Gallery): Gallery[] {
     const children = parent.children as string[];
     return children
       .map(childId => {
-        return { ...Galleries[childId] };
+        return {...this.galleryData[childId] };
       })
       .filter(child => !!child.title);
   }
