@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  homeGallery: 'PwOelGZl'
+  homeGallery: 'PwOelGZl',
+  api: 'http://papilu.sph'
 };
 
 /*
