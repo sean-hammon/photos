@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GalleryMap } from '@app/galleries/gallery-map.interface';
-import { GalleryService } from '@app/galleries/gallery.service';
 import { tap } from 'rxjs/operators';
-import { Gallery } from './gallery.interface';
-import {Photo, PhotoDisplay} from '@app/photos';
+
+import { Photo, PhotoDisplay } from '@app/photos';
 import { Photos } from '@app/photos/photo-data';
+
+import { GalleryMap } from './gallery-map.interface';
+import { Gallery } from './gallery.interface';
+import { GalleryService } from './gallery.service';
 
 @Injectable({ providedIn: 'root' })
 export class GalleryProvider {

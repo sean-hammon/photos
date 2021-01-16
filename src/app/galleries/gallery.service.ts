@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { GalleryMap } from '@app/galleries/gallery-map.interface';
-import { GalleryResponse } from '@app/galleries/gallery-response.interface';
 import {environment} from '@env';
+import { GalleryMap } from './gallery-map.interface';
+import { GalleryResponse } from './gallery-response.interface';
 
 @Injectable({providedIn: 'root'})
 export class GalleryService {
