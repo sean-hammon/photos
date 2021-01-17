@@ -34,6 +34,11 @@ export class GalleryProvider {
       .map(childId => {
         return {...this.galleryData[childId] };
       })
+
+      // child galleries might be empty and thus not
+      // part of the gallery collection returned from
+      // the api.
+
       .filter(child => !!child.title);
   }
 
