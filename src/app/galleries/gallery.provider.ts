@@ -27,6 +27,11 @@ export class GalleryProvider {
     return {...this.galleryData[hash]};
   }
 
+  getFeaturedGallery(): Gallery {
+      return Object.values(this.galleryData)
+        .filter(gallery => gallery.featured)[0];
+  }
+
   childGalleries(parent: Gallery): Gallery[] {
     const children = parent.children as string[];
     return children

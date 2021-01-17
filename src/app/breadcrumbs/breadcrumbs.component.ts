@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { SessionStore } from './../store/session.store';
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryProvider } from '@app/galleries';
-import { environment } from '@env';
 
 interface GalleryLink {
   title: string;
@@ -28,7 +27,6 @@ export class BreadcrumbsComponent implements OnInit {
     private session: SessionStore,
     private galleries: GalleryProvider
   ) {
-    this.home = this.galleries.getGallery(environment.homeGallery);
     this.ancestors = [];
   }
 
@@ -54,6 +52,7 @@ export class BreadcrumbsComponent implements OnInit {
         this.rebuildAncestors(gallery);
       }
     } else {
+      this.home = gallery;
       this.ancestors = [{
         title: this.home.title,
         id: this.home.id,
@@ -94,12 +93,14 @@ export class BreadcrumbsComponent implements OnInit {
 
   rebuildAncestors(gallery: Gallery) {
 
-    this.galleryProvider.findAncestors(gallery)
-      .subscribe(
-        ancestor => this.addAncestor(ancestor),
-        () => {},
-        () => console.log('ancestor complete')
-      );
+    let g = { ...gallery };
+    this.addAncestor(g);
+    do {
+
+      g = this.galleries.getGallery(g.parent_id);
+      this.addAncestor(g);
+
+    } while (g.parent_id !== null);
   }
 
   addAncestor(gallery: Gallery) {
