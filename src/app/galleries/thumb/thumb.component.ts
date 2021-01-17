@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostBinding, HostListener, ViewChild, Element
 import { Photo } from '@app/photos';
 import { Router } from '@angular/router';
 import { fadeAnimation } from '@app/fade.animation';
+import {environment} from '@env';
 
 @Component({
   selector: 'app-thumb',
@@ -38,16 +39,17 @@ export class ThumbComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const href = environment.api + '/photos' + this.item.files.thumb.path;
     const img = new Image();
     img.onload = () => {
       this.loading = false;
       this.fadeState = 'visible';
-      this.thumb.nativeElement.style.backgroundImage = `url(${this.item.thumb.href})`;
+      this.thumb.nativeElement.style.backgroundImage = `url(${href})`;
     };
     img.onerror = (err: ErrorEvent) => {
       console.log(img.src + ' failed: ' + err.message);
     };
-    img.src = this.item.thumb.href;
+    img.src = href;
   }
 
 }

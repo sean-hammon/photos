@@ -3,6 +3,7 @@ import { fromEvent, Subject, timer } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
 import { SafeStyle } from '@angular/platform-browser';
+import {environment} from '@env';
 
 interface ImageStyles {
   backgroundImage: string;
@@ -69,7 +70,8 @@ export class PhotoUxHelper {
     const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
     const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
 
-    const file = photo.photo;
+    const file = photo.files.hifi;
+    const href = environment.api + '/photos' + file.path;
     let imgH = file.height;
     let imgW = file.width;
 
@@ -92,7 +94,7 @@ export class PhotoUxHelper {
     }
 
     const styles: ImageStyles = {
-      backgroundImage: `url(${file.href})`,
+      backgroundImage: `url(${href})`,
       height: `${imgH}px`,
       width: `${imgW}px`,
       top: '0',

@@ -3,9 +3,9 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } fr
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
 import { SessionStore } from '@app/store/session.store';
-import { PhotoProvider, PhotoDisplay } from '@app/photos';
-import {PhotoUxHelper} from '@app/photos/photo-ux.helper';
+import { PhotoProvider, PhotoDisplay, PhotoUxHelper } from '@app/photos';
 import { fadeAnimation } from '@app/fade.animation';
+import { environment } from '@env';
 
 @Component({
   selector: 'app-photo',
@@ -103,8 +103,8 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   preloadImage(photo: PhotoDisplay) {
     const img = new Image();
     img.onload = () => this.updateTemplate(photo);
-    img.onerror = (err: ErrorEvent) => console.log(photo.photo.photo.href + ': ' + err.message);
-    img.src = photo.photo.photo.href;
+    img.onerror = (err: ErrorEvent) => console.log(photo.photo.files.hifi.path + ': ' + err.message);
+    img.src = environment.api + '/photos' + photo.photo.files.hifi.path;
   }
 
   updateTemplate(display: PhotoDisplay) {
