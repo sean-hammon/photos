@@ -6,9 +6,19 @@ import { Photos } from '@app/photos/photo-data';
 @Injectable({providedIn: 'root'})
 export class PhotoProvider {
 
+  private photoData: PhotoMap;
+
   constructor(
+    private service: PhotoService,
     private galleries: GalleryProvider
   ) { }
+
+  initializePhotos() {
+    return this.service.loadPhotos()
+      .pipe(
+        tap(photos => this.photoData = photos)
+      );
+  }
 
   getPhoto(photoHash: string, galleryHash: string): PhotoDisplay {
 
