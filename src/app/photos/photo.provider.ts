@@ -5,7 +5,6 @@ import { GalleryProvider } from '@app/galleries';
 import { PhotoDisplay } from './photo-display.interface';
 import { PhotoMap } from './photo-map.interface';
 import { PhotoService } from './photo.service';
-import { Photos } from '@app/photos/photo-data';
 
 @Injectable({providedIn: 'root'})
 export class PhotoProvider {
@@ -30,7 +29,7 @@ export class PhotoProvider {
     let next = null;
 
     const gallery = this.galleries.getGallery(galleryHash);
-    const photo = Photos[photoHash];
+    const photo = this.photoData[photoHash];
     const index = gallery.photos.findIndex(hash => hash === photoHash);
 
     if (index + 1 < gallery.photos.length) {
@@ -52,7 +51,7 @@ export class PhotoProvider {
 
   makeHref(photoHash: string, galleryHash: string): string[] {
     const g = this.galleries.getGallery(galleryHash);
-    const p = Photos[photoHash];
+    const p = this.photoData[photoHash];
     return [
       'photo', p.slug, photoHash,
       'in', g.slug , galleryHash,
