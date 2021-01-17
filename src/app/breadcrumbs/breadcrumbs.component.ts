@@ -7,7 +7,7 @@ import { environment } from '@env';
 
 interface GalleryLink {
   title: string;
-  hash: string;
+  id: string;
   link: string[];
 }
 
@@ -44,8 +44,8 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   updateCrumbs(gallery: Gallery) {
-    if (gallery.hash !== this.home.hash) {
-      const inPath = this.ancestors.findIndex(g => g.hash === gallery.hash);
+    if (this.home && gallery.id !== this.home.id) {
+      const inPath = this.ancestors.findIndex(g => g.id === gallery.id);
       if (this.ancestors.length > 0) {
         // Regular gallery navigation
         this.updateAncestors(gallery, inPath);
@@ -56,7 +56,7 @@ export class BreadcrumbsComponent implements OnInit {
     } else {
       this.ancestors = [{
         title: this.home.title,
-        hash: this.home.hash,
+        id: this.home.id,
         link: ['/']
       }];
     }
@@ -64,8 +64,8 @@ export class BreadcrumbsComponent implements OnInit {
     this.leaves = children.map(c => {
       return {
         title: c.title,
-        hash: c.hash,
-        link: ['/gallery', c.slug, c.hash]
+        id: c.id,
+        link: ['/gallery', c.slug, c.id]
       };
     });
   }
@@ -86,30 +86,28 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.ancestors.push({
       title: gallery.title,
-      hash: gallery.hash,
-      link: ['/gallery', gallery.slug, gallery.hash]
+      id: gallery.id,
+      link: ['/gallery', gallery.slug, gallery.id]
     });
 
   }
 
   rebuildAncestors(gallery: Gallery) {
 
-    let g = { ...gallery };
-    this.addAncestor(g);
-    do {
-
-      g = this.galleries.getGallery(g.parent_id);
-      this.addAncestor(g);
-
-    } while (g.parent_id !== null);
+    this.galleryProvider.findAncestors(gallery)
+      .subscribe(
+        ancestor => this.addAncestor(ancestor),
+        () => {},
+        () => console.log('ancestor complete')
+      );
   }
 
   addAncestor(gallery: Gallery) {
     const g = {
       title: gallery.title,
-      hash: gallery.hash,
-      link: ['/gallery', gallery.slug, gallery.hash]
-    }
+      id: gallery.id,
+      link: ['/gallery', gallery.slug, gallery.id]
+    };
     this.ancestors.unshift(g);
   }
 

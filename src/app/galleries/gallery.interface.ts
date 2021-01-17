@@ -1,5 +1,5 @@
 export interface Gallery {
-    hash: string;
+    id: string;
     parent_id: string;
     title: string;
     thumb: string;

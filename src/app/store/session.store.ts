@@ -24,7 +24,7 @@ export class SessionStore {
 
   selectGallery(hash: string) {
     const current = this.gallery$.getValue();
-    if (current && current.hash === hash) {
+    if (current && current.id === hash) {
       return;
     }
 
