@@ -1,4 +1,4 @@
-export interface File {
+export interface FileData {
   id: number;
   mimetype: string;
   height?: number;

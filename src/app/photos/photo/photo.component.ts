@@ -90,7 +90,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
         this.gHash = path.pop().toString();
         this.session.selectGallery(this.gHash);
 
-        const display = this.photos.getPhoto(params.phash, this.gHash);
+        const display = this.photos.getGalleryPhoto(params.phash, this.gHash);
         this.nav = {
           next: display.next,
           prev: display.prev
@@ -152,7 +152,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isDragging = true;
     let direction = 'ns';
     const current = this.display$.getValue();
-    if (current.photo.photo.width < current.photo.photo.height) {
+    if (current.photo.width < current.photo.height) {
       direction = 'ew';
     }
     this.uxHelper.startDrag(direction, event);

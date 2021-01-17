@@ -125,7 +125,7 @@ export class PhotoUxHelper {
     if (imgRatio > 1) {
 
       const center = Math.round((winH - imgH) / 2);
-      top = center /2;
+      top = center / 2;
       if (file.offset != null) {
         top = center - (imgH * file.offset / 100) + (winH / 2);
         if (top > 0) {

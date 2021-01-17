@@ -1,4 +1,4 @@
-import { File } from './file.interface';
+import { FileData } from './file-data.interface';
 
 export interface Photo {
   id: number;
@@ -11,6 +11,6 @@ export interface Photo {
   width: number;
   route: string[];
   files: {
-    [size: string]: File;
+    [size: string]: FileData;
   };
 }
