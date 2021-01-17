@@ -10,6 +10,7 @@ import { TopbarComponent } from './topbar/topbar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { GalleryProvider, GalleryService } from '@app/galleries';
+import { PhotoService } from "@app/photos/photo.service";
 import { galleryInitializer } from '@app/intializer.factories';
 
 import { PhotoComponent } from './photos/photo/photo.component';
@@ -38,6 +39,7 @@ import { ROUTES } from './app.routes';
   providers: [
     GalleryProvider,
     GalleryService,
+    PhotoService,
     {
       provide: APP_INITIALIZER,
       useFactory: galleryInitializer,
