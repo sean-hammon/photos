@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
-import { Photo, PhotoDisplay } from '@app/photos';
+import { Photo, PhotoDisplay, PhotoProvider } from '@app/photos';
 
 import { GalleryMap } from './gallery-map.interface';
 import { Gallery } from './gallery.interface';
@@ -13,7 +13,7 @@ export class GalleryProvider {
   private galleryData: GalleryMap;
 
   constructor(
-    private service: GalleryService
+    private service: GalleryService,
   ) { }
 
   initializeGalleries() {
@@ -39,51 +39,6 @@ export class GalleryProvider {
       // the api.
 
       .filter(child => !!child.title);
-  }
-
-  childThumbs(parent: Gallery) {
-    let children;
-    if (typeof parent.children[0] === 'string') {
-      children = this.childGalleries(parent);
-    } else {
-      children = parent.children as Gallery[];
-    }
-    return children.map(child => {
-      let p: Photo;
-      if (child.photos.length) {
-        const r = Math.floor(Math.random() * child.photos.length);
-        const hash = child.photos[r];
-        p  = {...Photos[hash]};
-      } else {
-        p = this.childThumbs(child)[0];
-      }
-
-      p.title = child.title;
-      p.route = ['/gallery', child.slug, child.hash];
-      return p;
-    });
-
-  }
-
-  photos(gallery: Gallery) {
-    return gallery.photos.map(hash => {
-      const p = {...Photos[hash]};
-      p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.hash];
-      return p;
-    });
-  }
-
-  randomPhoto(gallery: Gallery): PhotoDisplay {
-
-    const rnd = Math.floor(Math.random() * gallery.photos.length);
-    const hash = gallery.photos[rnd];
-
-    return {
-      hash,
-      prev: null,
-      next: null,
-      photo: Photos[hash]
-    };
   }
 
 }

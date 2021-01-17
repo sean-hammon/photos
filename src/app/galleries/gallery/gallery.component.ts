@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { SessionStore } from '@app/store/session.store';
 import { Subject } from 'rxjs';
 import { takeUntil, filter, take } from 'rxjs/operators';
-import { Photo } from '@app/photos';
+import { Photo, PhotoProvider } from '@app/photos';
 
 @Component({
   selector: 'app-gallery',
@@ -19,6 +19,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   constructor(
     private galleryProvider: GalleryProvider,
+    private photoProvider: PhotoProvider,
     private route: ActivatedRoute,
     private router: Router,
     private session: SessionStore
@@ -46,9 +47,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
       filter(gallery => !!gallery),
       takeUntil(this.unsub$))
     .subscribe(g => {
-      this.photos = this.galleryProvider.photos(g);
+      this.photos = this.photoProvider.galleryPhotos(g);
       if (!this.photos.length) {
-        this.photos = this.galleryProvider.childThumbs(g);
+        this.photos = this.photoProvider.childThumbs(g);
       }
     });
 

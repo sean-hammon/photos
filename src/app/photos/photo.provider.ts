@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Photo } from '@app/photos/photo.interface';
 import { tap } from 'rxjs/operators';
-import { GalleryProvider } from '@app/galleries';
+import { Gallery, GalleryProvider } from '@app/galleries';
 
 import { PhotoDisplay } from './photo-display.interface';
 import { PhotoMap } from './photo-map.interface';
@@ -23,7 +24,42 @@ export class PhotoProvider {
       );
   }
 
-  getPhoto(photoHash: string, galleryHash: string): PhotoDisplay {
+  getPhoto(hash: string) {
+    return {...this.photoData[hash]};
+  }
+
+  childThumbs(parent: Gallery) {
+    let children;
+    if (typeof parent.children[0] === 'string') {
+      children = this.galleries.childGalleries(parent);
+    } else {
+      children = parent.children as Gallery[];
+    }
+    return children.map(child => {
+      let p: Photo;
+      if (child.photos.length) {
+        const r = Math.floor(Math.random() * child.photos.length);
+        const hash = child.photos[r];
+        p  = this.getPhoto(hash);
+      } else {
+        p = this.childThumbs(child)[0];
+      }
+
+      p.title = child.title;
+      p.route = ['/gallery', child.slug, child.hash];
+      return p;
+    });
+
+  }
+  galleryPhotos(gallery: Gallery) {
+    return gallery.photos.map(hash => {
+      const p = this.getPhoto(hash);
+      p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.hash];
+      return p;
+    });
+  }
+
+  getGalleryPhoto(photoHash: string, galleryHash: string): PhotoDisplay {
 
     let prev = null;
     let next = null;
@@ -47,6 +83,19 @@ export class PhotoProvider {
       photo
     };
 
+  }
+
+  randomGalleryPhoto(gallery: Gallery): PhotoDisplay {
+
+    const rnd = Math.floor(Math.random() * gallery.photos.length);
+    const hash = gallery.photos[rnd];
+
+    return {
+      hash,
+      prev: null,
+      next: null,
+      photo: this.getPhoto(hash)
+    };
   }
 
   makeHref(photoHash: string, galleryHash: string): string[] {
