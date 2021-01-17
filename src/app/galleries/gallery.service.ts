@@ -15,7 +15,7 @@ export class GalleryService {
   ) { }
 
   loadGalleries(): Observable<GalleryMap> {
-    return this.http.get<GalleryResponse>(`${environment.api}/galleries`)
+    return this.http.get<GalleryResponse>(`${environment.api}/galleries?as=map`)
       .pipe(
         map(response => response.data)
       );
