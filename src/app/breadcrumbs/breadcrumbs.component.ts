@@ -32,6 +32,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   ngOnInit(): void {
     this.unsub$ = new Subject();
+    this.home = this.galleries.getFeaturedGallery();
 
     this.session.gallery$
       .pipe(
@@ -100,7 +101,7 @@ export class BreadcrumbsComponent implements OnInit {
       g = this.galleries.getGallery(g.parent_id);
       this.addAncestor(g);
 
-    } while (g.parent_id !== null);
+    } while (g.parent_id);
   }
 
   addAncestor(gallery: Gallery) {
