@@ -49,14 +49,16 @@ export class PhotoProvider {
       p.route = ['/gallery', child.slug, child.id];
       return p;
     });
-
   }
+
   galleryPhotos(gallery: Gallery) {
-    return gallery.photos.map(hash => {
-      const p = this.getPhoto(hash);
-      p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.id];
-      return p;
-    });
+    return gallery.photos
+      .map(hash => {
+        const p = this.getPhoto(hash);
+        p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.id];
+        return p;
+      })
+      .filter(photo => photo.slug);
   }
 
   getGalleryPhoto(photoHash: string, galleryHash: string): PhotoDisplay {
