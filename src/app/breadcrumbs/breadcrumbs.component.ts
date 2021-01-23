@@ -3,12 +3,10 @@ import { Subject } from 'rxjs';
 import { SessionStore } from './../store/session.store';
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryProvider } from '@app/galleries';
-import { Galleries } from '@app/galleries/gallery-data';
-import { environment } from '@env';
 
 interface GalleryLink {
   title: string;
-  hash: string;
+  id: string;
   link: string[];
 }
 
@@ -27,14 +25,14 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor(
     private session: SessionStore,
-    private galleryProvider: GalleryProvider
+    private galleries: GalleryProvider
   ) {
-    this.home = Galleries[environment.homeGallery];
     this.ancestors = [];
   }
 
   ngOnInit(): void {
     this.unsub$ = new Subject();
+    this.home = this.galleries.getFeaturedGallery();
 
     this.session.gallery$
       .pipe(
@@ -45,8 +43,8 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   updateCrumbs(gallery: Gallery) {
-    if (gallery.hash !== this.home.hash) {
-      const inPath = this.ancestors.findIndex(g => g.hash === gallery.hash);
+    if (this.home && gallery.id !== this.home.id) {
+      const inPath = this.ancestors.findIndex(g => g.id === gallery.id);
       if (this.ancestors.length > 0) {
         // Regular gallery navigation
         this.updateAncestors(gallery, inPath);
@@ -55,9 +53,10 @@ export class BreadcrumbsComponent implements OnInit {
         this.rebuildAncestors(gallery);
       }
     } else {
+      this.home = gallery;
       this.ancestors = [{
         title: this.home.title,
-        hash: this.home.hash,
+        id: this.home.id,
         link: ['/']
       }];
     }
@@ -65,8 +64,8 @@ export class BreadcrumbsComponent implements OnInit {
     this.leaves = children.map(c => {
       return {
         title: c.title,
-        hash: c.hash,
-        link: ['/gallery', c.slug, c.hash]
+        id: c.id,
+        link: ['/gallery', c.slug, c.id]
       };
     });
   }
@@ -87,8 +86,8 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.ancestors.push({
       title: gallery.title,
-      hash: gallery.hash,
-      link: ['/gallery', gallery.slug, gallery.hash]
+      id: gallery.id,
+      link: ['/gallery', gallery.slug, gallery.id]
     });
 
   }
@@ -99,18 +98,18 @@ export class BreadcrumbsComponent implements OnInit {
     this.addAncestor(g);
     do {
 
-      g = this.galleryProvider.getGallery(g.parent_id);
+      g = this.galleries.getGallery(g.parent_id);
       this.addAncestor(g);
 
-    } while (g.parent_id !== null);
+    } while (g.parent_id);
   }
 
   addAncestor(gallery: Gallery) {
     const g = {
       title: gallery.title,
-      hash: gallery.hash,
-      link: ['/gallery', gallery.slug, gallery.hash]
-    }
+      id: gallery.id,
+      link: ['/gallery', gallery.slug, gallery.id]
+    };
     this.ancestors.unshift(g);
   }
 

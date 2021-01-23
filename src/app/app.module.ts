@@ -1,17 +1,23 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+
+import { GalleryProvider, GalleryService } from '@app/galleries';
+import { PhotoProvider, PhotoService } from '@app/photos';
+import { galleryInitializer, photoInitializer } from '@app/intializer.factories';
+
 import { PhotoComponent } from './photos/photo/photo.component';
-import { ROUTES } from './app.routes';
 import { HomeComponent } from './photos/home/home.component';
 import { GalleryComponent } from './galleries/gallery/gallery.component';
 import { ThumbComponent } from './galleries/thumb/thumb.component';
+import { ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -27,9 +33,27 @@ import { ThumbComponent } from './galleries/thumb/thumb.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, {enableTracing: false})
   ],
-  providers: [],
+  providers: [
+    GalleryProvider,
+    GalleryService,
+    PhotoService,
+    PhotoProvider,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: galleryInitializer,
+      deps: [GalleryProvider],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: photoInitializer,
+      deps: [PhotoProvider],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
