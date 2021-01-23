@@ -1,6 +1,6 @@
 :host {
   position: absolute;
-  top: 10px;
+  top: 11px;
   left: 11px;
   right: 9px;
   display: block;
@@ -26,4 +26,22 @@
   display: inline-block;
   margin-left: 3em;
   font-size: .9rem;
+}
+.widgets {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 37.5%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+.widget-padding {
+  flex: 1;
+}
+.zoom-widget {
+  flex: 0 0 24px;
+  background-image: url("/assets/zoom_in_1x.png");
+  height: 24px;
+  width: 24px;
 }
