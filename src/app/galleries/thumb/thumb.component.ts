@@ -39,7 +39,9 @@ export class ThumbComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const href = environment.api + '/photos' + this.item.files.thumb.path;
+    const href = environment.api
+      + environment.imageRoot
+      + this.item.files.thumb.path;
     const img = new Image();
     img.onload = () => {
       this.loading = false;

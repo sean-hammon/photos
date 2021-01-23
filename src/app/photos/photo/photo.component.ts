@@ -104,7 +104,9 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     const img = new Image();
     img.onload = () => this.updateTemplate(photo);
     img.onerror = (err: ErrorEvent) => console.log(photo.photo.files.hifi.path + ': ' + err.message);
-    img.src = environment.api + '/photos' + photo.photo.files.hifi.path;
+    img.src = environment.api
+      + environment.imageRoot
+      + photo.photo.files.hifi.path;
   }
 
   updateTemplate(display: PhotoDisplay) {

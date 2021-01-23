@@ -71,7 +71,9 @@ export class PhotoUxHelper {
     const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
 
     const file = photo.files.hifi;
-    const href = environment.api + '/photos' + file.path;
+    const href = environment.api
+      + environment.imageRoot
+      + file.path;
     let imgH = file.height;
     let imgW = file.width;
 
