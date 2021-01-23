@@ -110,6 +110,9 @@ export class BreadcrumbsComponent implements OnInit {
       id: gallery.id,
       link: ['/gallery', gallery.slug, gallery.id]
     };
+    if (g.id === this.home.id) {
+      g.link = ['/'];
+    }
     this.ancestors.unshift(g);
   }
 
