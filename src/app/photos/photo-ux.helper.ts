@@ -104,11 +104,11 @@ export class PhotoUxHelper {
     };
 
     //  Landscape
-    if (imgRatio <= 1) {
+    if (imgRatio > 1) {
 
       const center = Math.round((winW - imgW) / 2);
       if (file.offset != null) {
-        left = center - (imgW * file.offset / 100) + (winW / 2);
+        left = - (imgW * file.offset / 100) + winW;
         if (left > 0) {
           left = 0;
         } else if (left < winW - imgW) {
@@ -124,12 +124,12 @@ export class PhotoUxHelper {
     }
 
     //  Portrait
-    if (imgRatio > 1) {
+    if (imgRatio <= 1) {
 
       const center = Math.round((winH - imgH) / 2);
       top = center / 2;
       if (file.offset != null) {
-        top = center - (imgH * file.offset / 100) + (winH / 2);
+        top = - (imgH * file.offset / 100) + winH;
         if (top > 0) {
           top = 0;
         } else if (top < winH - imgH) {
