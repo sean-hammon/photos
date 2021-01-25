@@ -10,15 +10,22 @@
      class='photo two'></div>
 
 <div class="photo-nav prev"
-       (click)="prevPhoto()"
-       [class.hide_nav]="!nav?.prev">
-    <img src="/assets/ic_chevron_left_white_24px.svg">
-  </div>
+     (click)="prevPhoto()"
+     [class.hide_nav]="!nav?.prev">
+  <img src="/assets/ic_chevron_left_white_24px.svg">
+</div>
 
-  <div class="photo-nav next"
-       (click)="nextPhoto()"
-       [class.hide_nav]="!nav?.next">
-    <img src="/assets/ic_chevron_right_white_24px.svg">
-  </div>
+<div class="photo-nav next"
+     (click)="nextPhoto()"
+     [class.hide_nav]="!nav?.next">
+  <img src="/assets/ic_chevron_right_white_24px.svg">
+</div>
 
+<div class="widgets">
+  <div class="widget east-west active"></div>
+  <div class="widget-spacer"></div>
+  <div class="widget zoom-out active"></div>
+  <div class="widget-spacer"></div>
+  <div class="widget north-south active"></div>
+</div>
 <app-spinner [display]="loading"></app-spinner>
