@@ -33,7 +33,6 @@ export class TopbarComponent implements OnInit, OnDestroy {
       )
       .subscribe((event: RouterEvent) => {
         const r = event.url.substr(1, 5);
-        console.log(r);
         if (r === 'photo') {
           this.photoRoute = true;
         }
