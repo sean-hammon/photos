@@ -154,7 +154,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isDragging = true;
     let direction = 'ns';
     const current = this.display$.getValue();
-    if (current.photo.width < current.photo.height) {
+    if (current.photo.files.hifi.width > current.photo.files.hifi.height) {
       direction = 'ew';
     }
     this.uxHelper.startDrag(direction, event);
