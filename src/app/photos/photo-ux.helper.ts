@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, Subject, timer } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subject, timer } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
 import { SafeStyle } from '@angular/platform-browser';
@@ -17,6 +17,9 @@ interface ImageStyles {
 @Injectable({ providedIn: 'root' })
 export class PhotoUxHelper {
 
+  public zoomActive$ = new BehaviorSubject<boolean>(false);
+  public dragDir$ = new BehaviorSubject<string>('');
+
   private cancel$ = new Subject<boolean>();
 
   private target: HTMLElement;
@@ -27,13 +30,13 @@ export class PhotoUxHelper {
   private initialTransition: string;
   private minLeft: number;
   private minTop: number;
-  private dir: string;
+  private zoomState: string;
 
   private sitePadding = 10;
 
-  startDrag(dir: string, ev: MouseEvent) {
+  startDrag(ev: MouseEvent) {
 
-    this.dir = dir;
+    const dir = this.dragDir$.getValue();
     this.initialX = ev.pageX || ev.clientX;
     this.initialY = ev.pageY || ev.clientY;
 
@@ -66,6 +69,9 @@ export class PhotoUxHelper {
   coverScreen(photo: Photo): SafeStyle {
 
     let imgRatio, viewRatio, top, left;
+
+    this.zoomActive$.next(false);
+    this.dragDir$.next('');
 
     const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
     const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
@@ -120,6 +126,8 @@ export class PhotoUxHelper {
       styles.cursor = 'default';
       if (imgW - winW > 50) {
         styles.cursor = 'ew-resize';
+        this.zoomActive$.next(true);
+        this.dragDir$.next('ew');
       }
     }
 
@@ -141,6 +149,8 @@ export class PhotoUxHelper {
       styles.cursor = 'default';
       if (imgH - winH > 50) {
         styles.cursor = 'ns-resize';
+        this.zoomActive$.next(true);
+        this.dragDir$.next('ns');
       }
 
     }
@@ -156,7 +166,8 @@ export class PhotoUxHelper {
   }
 
   private constrainedDrag(event: MouseEvent) {
-    if (this.dir === 'ns') {
+    const dir = this.dragDir$.getValue();
+    if (dir === 'ns') {
 
       const currentY = event.pageY || event.clientY;
       const diff = this.initialY - currentY;
