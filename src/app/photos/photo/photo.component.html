@@ -22,10 +22,17 @@
 </div>
 
 <div class="widgets">
-  <div class="widget east-west active"></div>
+  <div class="widget east-west"
+       [class.active]="(uxHelper.dragDir$ | async) === 'ew'"
+  ></div>
   <div class="widget-spacer"></div>
-  <div class="widget zoom-out active"></div>
+  <div class="widget"
+       [class.zoom-out]="true"
+       [class.active]="uxHelper.zoomActive$ | async"
+  ></div>
   <div class="widget-spacer"></div>
-  <div class="widget north-south active"></div>
+  <div class="widget north-south"
+       [class.active]="(uxHelper.dragDir$ | async) === 'ns'"
+  ></div>
 </div>
 <app-spinner [display]="loading"></app-spinner>

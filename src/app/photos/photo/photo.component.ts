@@ -42,7 +42,8 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private session: SessionStore,
-    private uxHelper: PhotoUxHelper
+
+    public uxHelper: PhotoUxHelper
   ) {
     this.loading = true;
     this.fadeStates = {
@@ -152,11 +153,6 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onMouseDown(event: MouseEvent) {
     this.isDragging = true;
-    let direction = 'ns';
-    const current = this.display$.getValue();
-    if (current.photo.files.hifi.width > current.photo.files.hifi.height) {
-      direction = 'ew';
-    }
-    this.uxHelper.startDrag(direction, event);
+    this.uxHelper.startDrag(event);
   }
 }
