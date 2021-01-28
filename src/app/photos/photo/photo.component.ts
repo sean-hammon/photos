@@ -36,6 +36,8 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   private display$: BehaviorSubject<PhotoDisplay>;
 
   private isDragging: boolean;
+  private mDn: number;
+  public zoomState: string;
 
   constructor(
     private photos: PhotoProvider,
@@ -46,6 +48,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     public uxHelper: PhotoUxHelper
   ) {
     this.loading = true;
+    this.zoomState = 'in';
     this.fadeStates = {
       one: 'hidden',
       two: 'hidden'
@@ -110,6 +113,14 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       + photo.photo.files.hifi.path;
   }
 
+  zoom() {
+    if (this.zoomState === 'in') {
+      this.zoomState = 'out';
+    } else {
+      this.zoomState = 'in';
+    }
+  }
+
   hideMe(event) {
     if (event.fromState === 'visible' && event.toState === 'hidden') {
       event.element.style.display = 'none';
@@ -153,6 +164,12 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onMouseUp() {
+    const mUp = Date.now();
+    const elapsed = mUp - this.mDn;
+    if (elapsed < 200 && this.uxHelper.zoomActive$.getValue()) {
+      this.zoom();
+    }
+
     if (this.isDragging) {
       this.uxHelper.stopDrag();
     }
@@ -161,6 +178,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onMouseDown(event: MouseEvent) {
     this.isDragging = true;
+    this.mDn = Date.now();
     this.uxHelper.startDrag(event);
   }
 }

@@ -29,7 +29,8 @@
   ></div>
   <div class="widget-spacer"></div>
   <div class="widget"
-       [class.zoom-out]="true"
+       [class.zoom-out]="zoomState === 'in'"
+       [class.zoom-in]="zoomState === 'out'"
        [class.active]="uxHelper.zoomActive$ | async"
   ></div>
   <div class="widget-spacer"></div>
