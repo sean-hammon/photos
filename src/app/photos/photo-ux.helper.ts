@@ -2,16 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, fromEvent, Subject, timer } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
-import { SafeStyle } from '@angular/platform-browser';
 import {environment} from '@env';
 
 interface ImageStyles {
-  backgroundImage: string;
   height: string;
   width: string;
   top?: string;
   left?: string;
   cursor?: string;
+  backgroundImage?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -66,7 +65,7 @@ export class PhotoUxHelper {
     this.target.style.transition = this.initialTransition;
   }
 
-  coverScreen(photo: Photo): SafeStyle {
+  coverScreen(photo: Photo): ImageStyles {
 
     let imgRatio, viewRatio, top, left;
 
@@ -157,6 +156,54 @@ export class PhotoUxHelper {
 
     return styles;
   }
+
+  private fitOnScreen(photo: Photo): ImageStyles {
+
+    let top, left,
+        imgH, imgW,
+        viewH, menuH,
+        imgRatio, viewRatio,
+        gutter = 15;
+
+    const file = photo.files.hifi;
+    const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
+    const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
+
+
+    imgH = file.height;
+    imgW = file.width;
+    menuH = document.getElementsByTagName('app-topbar').item(0).getBoundingClientRect().height;
+
+    top = menuH + gutter;
+    left = gutter;
+
+    viewH = winH - menuH - (gutter * 2);
+    imgRatio = imgW / imgH;
+    viewRatio = winW / viewH;
+
+    if (imgRatio > viewRatio) {
+
+        imgW = winW - (gutter * 2);
+        imgH = Math.round(imgW / imgRatio);
+        top = menuH + gutter - Math.round((imgH - viewH) / 2);
+
+    } else {
+
+        imgH = viewH;
+        imgW = Math.round(imgH * imgRatio);
+        top = menuH + gutter;
+        left = Math.round((winW - imgW) / 2);
+
+    }
+
+    return {
+      height: `${imgH}px`,
+      width: `${imgW}px`,
+      top: `${top}px`,
+      left: `${left}px`
+    };
+}
+
 
   private getWindowDimension() {
     return [
