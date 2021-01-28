@@ -23,7 +23,7 @@
   <img src="/assets/ic_chevron_right_white_24px.svg">
 </div>
 
-<div class="widgets">
+<div class="widgets" *ngIf="uxHelper.zoomActive$ | async">
   <div class="widget east-west"
        [class.active]="(uxHelper.dragDir$ | async) === 'ew'"
   ></div>
