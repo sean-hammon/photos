@@ -110,10 +110,18 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       + photo.photo.files.hifi.path;
   }
 
+  hideMe(event) {
+    if (event.fromState === 'visible' && event.toState === 'hidden') {
+      event.element.style.display = 'none';
+    }
+  }
+
   updateTemplate(display: PhotoDisplay) {
     if (this.activeChild === 'one') {
+      this.two.nativeElement.style.display = 'block';
       this.activeChild = 'two';
     } else {
+      this.one.nativeElement.style.display = 'block';
       this.activeChild = 'one';
     }
 
