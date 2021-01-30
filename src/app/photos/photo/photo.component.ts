@@ -114,10 +114,23 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   zoom() {
+    const display = this.display$.getValue();
     if (this.zoomState === 'in') {
       this.zoomState = 'out';
+      const styles = this.uxHelper.coverScreen(display.photo);
+      for (const key in styles) {
+        if (styles.hasOwnProperty(key)){
+          this[this.activeChild].nativeElement.style[key] = styles[key];
+        }
+      }
     } else {
       this.zoomState = 'in';
+      const styles = this.uxHelper.fitScreen(display.photo);
+      for (const key in styles) {
+        if (styles.hasOwnProperty(key)){
+          this[this.activeChild].nativeElement.style[key] = styles[key];
+        }
+      }
     }
   }
 

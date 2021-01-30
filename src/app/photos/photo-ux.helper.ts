@@ -157,7 +157,7 @@ export class PhotoUxHelper {
     return styles;
   }
 
-  private fitOnScreen(photo: Photo): ImageStyles {
+  public fitScreen(photo: Photo): ImageStyles {
 
     let top, left,
         imgH, imgW,
