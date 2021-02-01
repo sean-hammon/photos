@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, Subject, timer } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subject, timer } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { Photo } from '@app/photos/photo.interface';
-import { SafeStyle } from '@angular/platform-browser';
 import {environment} from '@env';
 
 interface ImageStyles {
-  backgroundImage: string;
   height: string;
   width: string;
   top?: string;
   left?: string;
   cursor?: string;
+  backgroundImage?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class PhotoUxHelper {
+
+  public zoomActive$ = new BehaviorSubject<boolean>(false);
+  public dragDir$ = new BehaviorSubject<string>('');
 
   private cancel$ = new Subject<boolean>();
 
@@ -27,13 +29,13 @@ export class PhotoUxHelper {
   private initialTransition: string;
   private minLeft: number;
   private minTop: number;
-  private dir: string;
+  private zoomState: string;
 
   private sitePadding = 10;
 
-  startDrag(dir: string, ev: MouseEvent) {
+  startDrag(ev: MouseEvent) {
 
-    this.dir = dir;
+    const dir = this.dragDir$.getValue();
     this.initialX = ev.pageX || ev.clientX;
     this.initialY = ev.pageY || ev.clientY;
 
@@ -63,9 +65,12 @@ export class PhotoUxHelper {
     this.target.style.transition = this.initialTransition;
   }
 
-  coverScreen(photo: Photo): SafeStyle {
+  coverScreen(photo: Photo): ImageStyles {
 
     let imgRatio, viewRatio, top, left;
+
+    this.zoomActive$.next(false);
+    this.dragDir$.next('');
 
     const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
     const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
@@ -120,6 +125,8 @@ export class PhotoUxHelper {
       styles.cursor = 'default';
       if (imgW - winW > 50) {
         styles.cursor = 'ew-resize';
+        this.zoomActive$.next(true);
+        this.dragDir$.next('ew');
       }
     }
 
@@ -141,12 +148,66 @@ export class PhotoUxHelper {
       styles.cursor = 'default';
       if (imgH - winH > 50) {
         styles.cursor = 'ns-resize';
+        this.zoomActive$.next(true);
+        this.dragDir$.next('ns');
       }
 
     }
 
     return styles;
   }
+
+  public fitScreen(photo: Photo): ImageStyles {
+
+    let top, left,
+        imgH, imgW,
+        viewH, menuH,
+        imgRatio, viewRatio;
+
+    const gutter = 15;
+    const file = photo.files.hifi;
+    const href = environment.api
+      + environment.imageRoot
+      + file.path;
+    const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
+    const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
+
+
+    imgH = file.height;
+    imgW = file.width;
+    menuH = document.getElementsByTagName('app-topbar').item(0).getBoundingClientRect().height;
+
+    top = menuH + gutter;
+    left = gutter;
+
+    viewH = winH - menuH - (gutter * 2);
+    imgRatio = imgW / imgH;
+    viewRatio = winW / viewH;
+
+    if (imgRatio > viewRatio) {
+
+        imgW = winW - (gutter * 2);
+        imgH = Math.round(imgW / imgRatio);
+        top = menuH + gutter - Math.round((imgH - viewH) / 2);
+
+    } else {
+
+        imgH = viewH;
+        imgW = Math.round(imgH * imgRatio);
+        top = menuH + gutter;
+        left = Math.round((winW - imgW) / 2);
+
+    }
+
+    return {
+      backgroundImage: href,
+      height: `${imgH}px`,
+      width: `${imgW}px`,
+      top: `${top}px`,
+      left: `${left}px`
+    };
+}
+
 
   private getWindowDimension() {
     return [
@@ -156,7 +217,8 @@ export class PhotoUxHelper {
   }
 
   private constrainedDrag(event: MouseEvent) {
-    if (this.dir === 'ns') {
+    const dir = this.dragDir$.getValue();
+    if (dir === 'ns') {
 
       const currentY = event.pageY || event.clientY;
       const diff = this.initialY - currentY;

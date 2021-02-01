@@ -1,17 +1,22 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd, RouterEvent } from '@angular/router';
+
+import {  Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+
 import { SessionStore } from '@app/store/session.store';
-import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.css']
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent implements OnInit, OnDestroy {
 
+  photoRoute = false;
   pageTitle: string;
   pageDescription: string;
+  unsub$: Subject<boolean>;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +25,18 @@ export class TopbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.unsub$ = new Subject<boolean>();
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.unsub$)
+      )
+      .subscribe((event: RouterEvent) => {
+        const r = event.url.substr(1, 5);
+        if (r === 'photo') {
+          this.photoRoute = true;
+        }
+      });
 
     this.session.photo$
     .pipe(filter(photo => !!photo))
@@ -34,6 +51,11 @@ export class TopbarComponent implements OnInit {
       this.pageTitle = g.title;
       this.pageDescription = g.description;
     });
+  }
+
+  ngOnDestroy() {
+    this.unsub$.next(true);
+    this.unsub$.complete();
   }
 
 }

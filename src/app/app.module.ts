@@ -17,6 +17,7 @@ import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';
 import { GalleryComponent } from './galleries/gallery/gallery.component';
 import { ThumbComponent } from './galleries/thumb/thumb.component';
+import { ZoomComponent } from './widgets/zoom/zoom.component';
 import { ROUTES } from './app.routes';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ROUTES } from './app.routes';
     PhotoComponent,
     HomeComponent,
     GalleryComponent,
-    ThumbComponent
+    ThumbComponent,
+    ZoomComponent
   ],
   imports: [
     BrowserModule,

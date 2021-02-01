@@ -2,23 +2,42 @@
      (mousedown)="onMouseDown($event)"
      (mouseup)="onMouseUp()"
      [@fadeState]="fadeStates.one"
+     (@fadeState.done)="hideMe($event)"
+     [ngStyle] = "styles.one"
      class='photo one'></div>
 <div #two
      (mousedown)="onMouseDown($event)"
      (mouseup)="onMouseUp()"
      [@fadeState]="fadeStates.two"
+     (@fadeState.done)="hideMe($event)"
+     [ngStyle] = "styles.two"
      class='photo two'></div>
 
 <div class="photo-nav prev"
-       (click)="prevPhoto()"
-       [class.hide_nav]="!nav?.prev">
-    <img src="/assets/ic_chevron_left_white_24px.svg">
-  </div>
+     (click)="prevPhoto()"
+     [class.hide_nav]="!nav?.prev">
+  <img src="/assets/ic_chevron_left_white_24px.svg">
+</div>
 
-  <div class="photo-nav next"
-       (click)="nextPhoto()"
-       [class.hide_nav]="!nav?.next">
-    <img src="/assets/ic_chevron_right_white_24px.svg">
-  </div>
+<div class="photo-nav next"
+     (click)="nextPhoto()"
+     [class.hide_nav]="!nav?.next">
+  <img src="/assets/ic_chevron_right_white_24px.svg">
+</div>
 
+<div class="widgets" *ngIf="uxHelper.zoomActive$ | async">
+  <div class="widget east-west"
+       [class.active]="(uxHelper.dragDir$ | async) === 'ew'"
+  ></div>
+  <div class="widget-spacer"></div>
+  <div class="widget"
+       [class.zoom-out]="zoomState === 'in'"
+       [class.zoom-in]="zoomState === 'out'"
+       [class.active]="uxHelper.zoomActive$ | async"
+  ></div>
+  <div class="widget-spacer"></div>
+  <div class="widget north-south"
+       [class.active]="(uxHelper.dragDir$ | async) === 'ns'"
+  ></div>
+</div>
 <app-spinner [display]="loading"></app-spinner>

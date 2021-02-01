@@ -36,18 +36,30 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   private display$: BehaviorSubject<PhotoDisplay>;
 
   private isDragging: boolean;
+  private mDn: number;
+  public zoomState: string;
+  public styles: {
+    one: any;
+    two: any;
+  };
 
   constructor(
     private photos: PhotoProvider,
     private route: ActivatedRoute,
     private router: Router,
     private session: SessionStore,
-    private uxHelper: PhotoUxHelper
+
+    public uxHelper: PhotoUxHelper
   ) {
     this.loading = true;
+    this.zoomState = 'in';
     this.fadeStates = {
       one: 'hidden',
       two: 'hidden'
+    };
+    this.styles = {
+      one: {},
+      two: {},
     };
   }
 
@@ -109,19 +121,33 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       + photo.photo.files.hifi.path;
   }
 
+  zoom() {
+    const display = this.display$.getValue();
+    if (this.zoomState === 'in') {
+      this.zoomState = 'out';
+      this.styles[this.activeChild] = this.uxHelper.fitScreen(display.photo);
+    } else {
+      this.zoomState = 'in';
+      this.styles[this.activeChild] = this.uxHelper.coverScreen(display.photo);
+    }
+  }
+
+  hideMe(event) {
+    if (event.fromState === 'visible' && event.toState === 'hidden') {
+      event.element.style.display = 'none';
+    }
+  }
+
   updateTemplate(display: PhotoDisplay) {
     if (this.activeChild === 'one') {
+      this.two.nativeElement.style.display = 'block';
       this.activeChild = 'two';
     } else {
+      this.one.nativeElement.style.display = 'block';
       this.activeChild = 'one';
     }
 
-    const styles = this.uxHelper.coverScreen(display.photo);
-    for (const key in styles) {
-      if (styles.hasOwnProperty(key)){
-        this[this.activeChild].nativeElement.style[key] = styles[key];
-      }
-    }
+    this.styles[this.activeChild] = this.uxHelper.coverScreen(display.photo);
 
     const lastChild = this.activeChild === 'one' ? 'two' : 'one';
     this.fadeStates[this.activeChild] = 'visible';
@@ -144,6 +170,12 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onMouseUp() {
+    const mUp = Date.now();
+    const elapsed = mUp - this.mDn;
+    if (elapsed < 200 && this.uxHelper.zoomActive$.getValue()) {
+      this.zoom();
+    }
+
     if (this.isDragging) {
       this.uxHelper.stopDrag();
     }
@@ -152,11 +184,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onMouseDown(event: MouseEvent) {
     this.isDragging = true;
-    let direction = 'ns';
-    const current = this.display$.getValue();
-    if (current.photo.files.hifi.width > current.photo.files.hifi.height) {
-      direction = 'ew';
-    }
-    this.uxHelper.startDrag(direction, event);
+    this.mDn = Date.now();
+    this.uxHelper.startDrag(event);
   }
 }
