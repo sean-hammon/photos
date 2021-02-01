@@ -3,12 +3,14 @@
      (mouseup)="onMouseUp()"
      [@fadeState]="fadeStates.one"
      (@fadeState.done)="hideMe($event)"
+     [ngStyle] = "styles.one"
      class='photo one'></div>
 <div #two
      (mousedown)="onMouseDown($event)"
      (mouseup)="onMouseUp()"
      [@fadeState]="fadeStates.two"
      (@fadeState.done)="hideMe($event)"
+     [ngStyle] = "styles.two"
      class='photo two'></div>
 
 <div class="photo-nav prev"

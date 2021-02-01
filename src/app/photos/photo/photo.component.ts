@@ -38,6 +38,10 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   private isDragging: boolean;
   private mDn: number;
   public zoomState: string;
+  public styles: {
+    one: any;
+    two: any;
+  };
 
   constructor(
     private photos: PhotoProvider,
@@ -52,6 +56,10 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fadeStates = {
       one: 'hidden',
       two: 'hidden'
+    };
+    this.styles = {
+      one: {},
+      two: {},
     };
   }
 
@@ -117,20 +125,10 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     const display = this.display$.getValue();
     if (this.zoomState === 'in') {
       this.zoomState = 'out';
-      const styles = this.uxHelper.coverScreen(display.photo);
-      for (const key in styles) {
-        if (styles.hasOwnProperty(key)){
-          this[this.activeChild].nativeElement.style[key] = styles[key];
-        }
-      }
+      this.styles[this.activeChild] = this.uxHelper.fitScreen(display.photo);
     } else {
       this.zoomState = 'in';
-      const styles = this.uxHelper.fitScreen(display.photo);
-      for (const key in styles) {
-        if (styles.hasOwnProperty(key)){
-          this[this.activeChild].nativeElement.style[key] = styles[key];
-        }
-      }
+      this.styles[this.activeChild] = this.uxHelper.coverScreen(display.photo);
     }
   }
 
@@ -149,12 +147,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
       this.activeChild = 'one';
     }
 
-    const styles = this.uxHelper.coverScreen(display.photo);
-    for (const key in styles) {
-      if (styles.hasOwnProperty(key)){
-        this[this.activeChild].nativeElement.style[key] = styles[key];
-      }
-    }
+    this.styles[this.activeChild] = this.uxHelper.coverScreen(display.photo);
 
     const lastChild = this.activeChild === 'one' ? 'two' : 'one';
     this.fadeStates[this.activeChild] = 'visible';
