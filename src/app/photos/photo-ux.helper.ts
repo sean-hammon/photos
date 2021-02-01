@@ -162,10 +162,13 @@ export class PhotoUxHelper {
     let top, left,
         imgH, imgW,
         viewH, menuH,
-        imgRatio, viewRatio,
-        gutter = 15;
+        imgRatio, viewRatio;
 
+    const gutter = 15;
     const file = photo.files.hifi;
+    const href = environment.api
+      + environment.imageRoot
+      + file.path;
     const winH = document.documentElement.clientHeight - (this.sitePadding * 2);
     const winW = document.documentElement.clientWidth - (this.sitePadding * 2);
 
@@ -197,6 +200,7 @@ export class PhotoUxHelper {
     }
 
     return {
+      backgroundImage: href,
       height: `${imgH}px`,
       width: `${imgW}px`,
       top: `${top}px`,
