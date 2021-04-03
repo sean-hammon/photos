@@ -15,7 +15,15 @@ export class GalleryService {
   ) { }
 
   loadGalleries(): Observable<GalleryMap> {
-    return this.http.get<GalleryResponse>(`${environment.api}/galleries?as=map`)
+    let api = `${environment.api}/galleries?as=map`;
+    const segments = document.location.href.split('/');
+    if (segments.includes('shared')) {
+      const key = segments.pop();
+      console.log(key);
+      api = `${environment.api}/galleries/share/${key}?as=map`;
+    }
+
+    return this.http.get<GalleryResponse>(api)
       .pipe(
         map(response => response.data)
       );

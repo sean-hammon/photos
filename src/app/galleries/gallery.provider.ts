@@ -30,6 +30,11 @@ export class GalleryProvider {
         .filter(gallery => gallery.featured)[0];
   }
 
+  getSharedGallery(key: string): Gallery {
+    return Object.values(this.galleryData)
+      .filter(gallery => gallery.share_key === key)[0];
+  }
+
   childGalleries(parent: Gallery): Gallery[] {
     const children = parent.children as string[];
     return children
