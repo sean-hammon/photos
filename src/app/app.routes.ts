@@ -14,6 +14,10 @@ export const ROUTES: Routes = [
       ]
     },
     {
+      path: 'gallery/shared/:key',
+      component: GalleryComponent
+    },
+    {
       path: 'gallery/:gslug/:ghash',
       component: GalleryComponent
     },
