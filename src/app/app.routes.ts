@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { SharedComponent } from '@app/photos/shared/shared.component';
 import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';
 import { GalleryComponent } from './galleries/gallery/gallery.component';
@@ -15,7 +16,7 @@ export const ROUTES: Routes = [
     },
     {
       path: 'gallery/shared/:key',
-      component: GalleryComponent
+      component: SharedComponent
     },
     {
       path: 'gallery/:gslug/:ghash',

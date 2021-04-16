@@ -19,6 +19,7 @@ import { GalleryComponent } from './galleries/gallery/gallery.component';
 import { ThumbComponent } from './galleries/thumb/thumb.component';
 import { ZoomComponent } from './widgets/zoom/zoom.component';
 import { ROUTES } from './app.routes';
+import { SharedComponent } from './photos/shared/shared.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ROUTES } from './app.routes';
     HomeComponent,
     GalleryComponent,
     ThumbComponent,
-    ZoomComponent
+    ZoomComponent,
+    SharedComponent
   ],
   imports: [
     BrowserModule,
