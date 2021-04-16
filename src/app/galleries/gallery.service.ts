@@ -19,7 +19,6 @@ export class GalleryService {
     const segments = document.location.href.split('/');
     if (segments.includes('shared')) {
       const key = segments.pop();
-      console.log(key);
       api = `${environment.api}/galleries/share/${key}?as=map`;
     }
 
