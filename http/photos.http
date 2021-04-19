@@ -1,0 +1,26 @@
+GET {{host}}/galleries?as=map&empty=true
+Accept: application/json
+
+###
+GET {{host}}/galleries/{{az}}/photos
+Accept: application/json
+
+###
+GET {{host}}/galleries/shared/{{share}}/photos
+Accept: application/json
+
+###
+GET {{host}}/photos/xXOKNGZe
+Accept: application/json
+
+> {%
+
+ %}
+###
+
+PUT http://localhost:80/api/item
+Content-Type: application/json
+
+{}
+
+###

@@ -1,0 +1,4 @@
+GET {{host}}/galleries/share/x0l3PRVPqNY7?empty=true
+Accept: application/json
+
+###
