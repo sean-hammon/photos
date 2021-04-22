@@ -15,7 +15,13 @@ export class PhotoService {
   ) { }
 
   loadPhotos(): Observable<PhotoMap> {
-    return this.http.get<PhotoResponse>(`${environment.api}/photos/all?include=files&as=map`)
+    let api = `${environment.api}/photos/all?include=files&as=map`;
+    const segments = document.location.href.split('/');
+    if (segments.includes('shared')) {
+      const key = segments.pop();
+      api = `${environment.api}/photos/shared/${key}include=files&?as=map`;
+    }
+    return this.http.get<PhotoResponse>(api)
       .pipe(
         map(response => response.data)
       );
