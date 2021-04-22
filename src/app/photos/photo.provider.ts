@@ -89,6 +89,13 @@ export class PhotoProvider {
 
   randomGalleryPhoto(gallery: Gallery): PhotoDisplay {
 
+    if (!gallery.photos.length) {
+      const child = Math.floor(Math.random() * gallery.children.length);
+      const gHash = gallery.children[child] as string;
+      const g = this.galleries.getGallery(gHash);
+      return this.randomGalleryPhoto(g);
+    }
+
     const rnd = Math.floor(Math.random() * gallery.photos.length);
     const hash = gallery.photos[rnd];
 
