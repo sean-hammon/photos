@@ -19,7 +19,7 @@ export class GalleryService {
     const segments = document.location.href.split('/');
     if (segments.includes('shared')) {
       const key = segments.pop();
-      api = `${environment.api}/galleries/share/${key}?as=map`;
+      api = `${environment.api}/galleries/shared/${key}?as=map`;
     }
 
     return this.http.get<GalleryResponse>(api)
