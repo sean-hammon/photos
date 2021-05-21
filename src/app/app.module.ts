@@ -14,7 +14,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { GalleryProvider, GalleryService } from '@app/galleries';
 import { PhotoProvider, PhotoService } from '@app/photos';
-import { galleryInitializer, photoInitializer } from '@app/intializer.factories';
+import { appInitializer } from '@app/intializer.factories';
+import { SessionStore } from '@app/store/session.store';
 
 import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';
@@ -52,16 +53,10 @@ import { ROUTES } from './app.routes';
     }
     {
       provide: APP_INITIALIZER,
-      useFactory: galleryInitializer,
-      deps: [GalleryProvider],
+      useFactory: appInitializer,
+      deps: [SessionStore, GalleryProvider, PhotoProvider],
       multi: true
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: photoInitializer,
-      deps: [PhotoProvider],
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })

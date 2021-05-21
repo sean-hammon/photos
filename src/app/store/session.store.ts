@@ -21,6 +21,10 @@ export class SessionStore {
     this.api$ = new BehaviorSubject<string>(environment.api);
   }
 
+  setSharedKey(key: string) {
+    this.api$.next(`${environment.api}/shared/${key}`);
+  }
+
   setPhoto(photo: Photo) {
     this.photo$.next({...photo});
   }
