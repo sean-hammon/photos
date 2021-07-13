@@ -4,6 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ENV } from './env/env.token';
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { TopbarComponent } from './topbar/topbar.component';
@@ -43,6 +46,10 @@ import { ROUTES } from './app.routes';
     GalleryService,
     PhotoService,
     PhotoProvider,
+    {
+      provide: ENV,
+      useValue: environment
+    }
     {
       provide: APP_INITIALIZER,
       useFactory: galleryInitializer,

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://papilu.sph',
+  // api: 'http://papilu.sph',
+  api: 'https://9q340prf4ho.julysean.com',
   imageRoot: '/img'
 };
 
