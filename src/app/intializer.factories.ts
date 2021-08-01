@@ -13,7 +13,7 @@ export function appInitializer(
   if (idx >= 0) {
     session.setSharedKey(segments[idx + 1]);
   }
-  return forkJoin([
+  return () => forkJoin([
     galleries.initializeGalleries(),
     photos.initializePhotos()
   ]).toPromise();
