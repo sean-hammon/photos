@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { GalleryProvider } from '@app/galleries';
 import { PhotoProvider } from '@app/photos';
-import { SessionStore } from '@app/store/session.store';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +14,11 @@ export class HomeComponent implements OnInit {
     private galleries: GalleryProvider,
     private photos: PhotoProvider,
     private router: Router,
-    private session: SessionStore,
   ) { }
 
   ngOnInit(): void {
     const gallery = this.galleries.getFeaturedGallery();
-    this.session.selectGallery(gallery.id);
+    this.galleries.selectGallery(gallery.id);
     const display = this.photos.randomGalleryPhoto(gallery);
     const cmd = [
       'photo', display.photo.slug, display.hash,
