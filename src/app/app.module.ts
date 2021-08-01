@@ -50,7 +50,7 @@ import { ROUTES } from './app.routes';
     {
       provide: ENV,
       useValue: environment
-    }
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
