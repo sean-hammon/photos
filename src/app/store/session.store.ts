@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { GalleryProvider, Gallery } from '@app/galleries';
+import { Gallery } from '@app/galleries';
 import { Photo } from '@app/photos';
 import { environment } from '@env';
 
@@ -12,9 +12,7 @@ export class SessionStore {
   photo$: BehaviorSubject<Photo>;
   api$: BehaviorSubject<string>;
 
-  constructor(
-    private galleries: GalleryProvider
-  ) {
+  constructor( ) {
     this.loading$ = new BehaviorSubject(true);
     this.gallery$ = new BehaviorSubject(null);
     this.photo$ = new BehaviorSubject(null);
@@ -29,15 +27,13 @@ export class SessionStore {
     this.photo$.next({...photo});
   }
 
-  selectGallery(hash: string) {
+  setGallery(next: Gallery) {
     const current = this.gallery$.getValue();
-    if (current && current.id === hash) {
+    if (current && current.id === next.id) {
       return;
     }
 
-    const g = { ...this.galleries.getGallery(hash) };
-    g.children = this.galleries.childGalleries(g);
-    this.gallery$.next(g);
+    this.gallery$.next(next);
   }
 
 }

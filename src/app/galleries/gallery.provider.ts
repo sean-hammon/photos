@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
+import { SessionStore } from '@app/store/session.store';
+
 import { GalleryMap } from './gallery-map.interface';
 import { Gallery } from './gallery.interface';
 import { GalleryService } from './gallery.service';
@@ -12,6 +14,7 @@ export class GalleryProvider {
 
   constructor(
     private service: GalleryService,
+    private session: SessionStore
   ) { }
 
   initializeGalleries() {
@@ -23,6 +26,12 @@ export class GalleryProvider {
 
   getGallery(hash: string) {
     return {...this.galleryData[hash]};
+  }
+
+  selectGallery(hash: string) {
+    const g = this.getGallery(hash);
+    g.children = this.childGalleries(g);
+    this.session.setGallery(g);
   }
 
   getFeaturedGallery(): Gallery {
