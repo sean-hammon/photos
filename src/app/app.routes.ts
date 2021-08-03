@@ -16,10 +16,14 @@ export const ROUTES: Routes = [
   {
     path: 'gallery/shared/:key',
     pathMatch: 'prefix',
-    redirectTo: 'shared/:key/gallery'
+    redirectTo: 'shared/:key'
   },
   {
-    path: 'shared/:key/gallery',
+    path: 'shared/:key/galleries/:ghash',
+    component: GalleryComponent
+  },
+  {
+    path: 'shared/:key',
     component: GalleryComponent
   },
   {
