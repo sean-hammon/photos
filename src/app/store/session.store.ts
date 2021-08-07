@@ -11,18 +11,20 @@ export class SessionStore {
   gallery$: BehaviorSubject<Gallery>;
   photo$: BehaviorSubject<Photo>;
   api$: BehaviorSubject<string>;
-  shared$: BehaviorSubject<string>;
+  rootPath$: BehaviorSubject<string>;
+  sharedKey$: BehaviorSubject<string>;
 
   constructor( ) {
     this.loading$ = new BehaviorSubject(true);
     this.gallery$ = new BehaviorSubject(null);
     this.photo$ = new BehaviorSubject(null);
-    this.shared$ = new BehaviorSubject(null);
+    this.rootPath$ = new BehaviorSubject('/');
+    this.sharedKey$ = new BehaviorSubject(null);
     this.api$ = new BehaviorSubject<string>(environment.api);
   }
 
   setSharedKey(key: string) {
-    this.shared$.next(key);
+    this.rootPath$.next(`/shared/${key}`);
     this.api$.next(`${environment.api}/shared/${key}`);
   }
 

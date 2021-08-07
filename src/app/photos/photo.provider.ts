@@ -46,7 +46,7 @@ export class PhotoProvider {
       }
 
       p.title = child.title;
-      p.route = ['/gallery', child.slug, child.id];
+      p.route = ['gallery', child.slug, child.id];
       return p;
     });
   }

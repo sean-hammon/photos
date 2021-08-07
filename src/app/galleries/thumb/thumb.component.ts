@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, HostBinding, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Photo } from '@app/photos';
 import { Router } from '@angular/router';
+
+import { environment } from '@env';
 import { fadeAnimation } from '@app/fade.animation';
-import {environment} from '@env';
+import { SessionStore } from '@app/store/session.store';
 
 @Component({
   selector: 'app-thumb',
@@ -27,7 +29,8 @@ export class ThumbComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private session: SessionStore
   ) {
     this.loading = true;
     this.fadeState = 'hidden';
@@ -36,6 +39,7 @@ export class ThumbComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.title = this.item.title;
     this.route = this.item.route;
+    this.route.unshift(this.session.rootPath$.getValue());
   }
 
   ngAfterViewInit(): void {

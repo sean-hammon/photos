@@ -35,7 +35,7 @@ export class GalleryProvider {
   }
 
   getFeaturedGallery(): Gallery {
-    const shareKey = this.session.shared$.getValue();
+    const shareKey = this.session.sharedKey$.getValue();
     if (shareKey) {
       return Object.values(this.galleryData)
         .filter(gallery => gallery.share_key === shareKey)[0];
