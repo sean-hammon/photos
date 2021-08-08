@@ -65,7 +65,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.route.params
     .pipe(take(1))
     .subscribe(params => {
-      if (params.key) {
+      if (params.key && !params.ghash) {
         const g = this.galleryProvider.getSharedGallery(params.key);
         this.galleryProvider.selectGallery(g.id);
       } else {
