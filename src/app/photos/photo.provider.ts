@@ -55,7 +55,7 @@ export class PhotoProvider {
     return gallery.photos
       .map(hash => {
         const p = this.getPhoto(hash);
-        p.route = ['/photo', p.slug, hash, 'in', gallery.slug, gallery.id];
+        p.route = ['photo', p.slug, hash, 'in', gallery.slug, gallery.id];
         return p;
       })
       .filter(photo => photo.slug);

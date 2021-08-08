@@ -19,12 +19,27 @@ export const ROUTES: Routes = [
     redirectTo: 'shared/:key'
   },
   {
-    path: 'shared/:key/gallery/:gslug/:ghash',
-    component: GalleryComponent
-  },
-  {
     path: 'shared/:key',
-    component: GalleryComponent,
+    children: [
+      {
+        path: 'gallery/:gslug/:ghash',
+        component: GalleryComponent
+      },
+      {
+        path: 'photo/:pslug/:phash',
+        children: [
+          {
+            path: '**',
+            component: PhotoComponent
+          }
+        ]
+      },
+      {
+        path: '',
+        component: GalleryComponent,
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: 'gallery/:gslug/:ghash',

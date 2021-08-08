@@ -17,7 +17,7 @@ export class PhotoService {
   ) { }
 
   loadPhotos(): Observable<PhotoMap> {
-    const api = this.session.api$.getValue() + '/photos?include=files&as=map';
+    const api = this.session.api$.getValue() + '/photos/all?include=files&as=map';
     return this.http.get<PhotoResponse>(api)
       .pipe(
         map(response => response.data)
