@@ -5,6 +5,7 @@ import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
 import { SessionStore } from '@app/store/session.store';
 import { PhotoProvider, PhotoDisplay, PhotoUxHelper } from '@app/photos';
 import { fadeAnimation } from '@app/fade.animation';
+import { GalleryProvider } from '@app/galleries';
 import { environment } from '@env';
 
 @Component({
@@ -44,6 +45,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   constructor(
+    private galleries: GalleryProvider,
     private photos: PhotoProvider,
     private route: ActivatedRoute,
     private router: Router,
@@ -100,7 +102,7 @@ export class PhotoComponent implements OnInit, AfterViewInit, OnDestroy {
     forkJoin([params$, path$])
       .subscribe(([params, path]) => {
         this.gHash = path.pop().toString();
-        this.session.selectGallery(this.gHash);
+        this.galleries.selectGallery(this.gHash);
 
         const display = this.photos.getGalleryPhoto(params.phash, this.gHash);
         this.nav = {

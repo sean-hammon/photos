@@ -4,6 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ENV } from './env/env.token';
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { TopbarComponent } from './topbar/topbar.component';
@@ -11,7 +14,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { GalleryProvider, GalleryService } from '@app/galleries';
 import { PhotoProvider, PhotoService } from '@app/photos';
-import { galleryInitializer, photoInitializer } from '@app/intializer.factories';
+import { appInitializer } from '@app/intializer.factories';
+import { SessionStore } from '@app/store/session.store';
 
 import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';
@@ -44,17 +48,15 @@ import { ROUTES } from './app.routes';
     PhotoService,
     PhotoProvider,
     {
-      provide: APP_INITIALIZER,
-      useFactory: galleryInitializer,
-      deps: [GalleryProvider],
-      multi: true
+      provide: ENV,
+      useValue: environment
     },
     {
       provide: APP_INITIALIZER,
-      useFactory: photoInitializer,
-      deps: [PhotoProvider],
+      useFactory: appInitializer,
+      deps: [SessionStore, GalleryProvider, PhotoProvider],
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

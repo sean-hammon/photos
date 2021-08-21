@@ -65,11 +65,11 @@ export class GalleryComponent implements OnInit, OnDestroy {
     this.route.params
     .pipe(take(1))
     .subscribe(params => {
-      if (params.key) {
+      if (params.key && !params.ghash) {
         const g = this.galleryProvider.getSharedGallery(params.key);
-        this.session.selectGallery(g.id);
+        this.galleryProvider.selectGallery(g.id);
       } else {
-        this.session.selectGallery(params.ghash);
+        this.galleryProvider.selectGallery(params.ghash);
       }
     });
 

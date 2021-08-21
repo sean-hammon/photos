@@ -22,6 +22,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   private unsub$: Subject<null>;
   private home: Gallery;
+  private root: string;
 
   constructor(
     private session: SessionStore,
@@ -33,6 +34,7 @@ export class BreadcrumbsComponent implements OnInit {
   ngOnInit(): void {
     this.unsub$ = new Subject();
     this.home = this.galleries.getFeaturedGallery();
+    this.root = this.session.rootPath$.getValue()
 
     this.session.gallery$
       .pipe(
@@ -57,7 +59,7 @@ export class BreadcrumbsComponent implements OnInit {
       this.ancestors = [{
         title: this.home.title,
         id: this.home.id,
-        link: ['/']
+        link: [this.root]
       }];
     }
     const children = gallery.children as Gallery[];
@@ -65,7 +67,7 @@ export class BreadcrumbsComponent implements OnInit {
       return {
         title: c.title,
         id: c.id,
-        link: ['/gallery', c.slug, c.id]
+        link: [this.root, 'gallery', c.slug, c.id]
       };
     });
   }
@@ -87,7 +89,7 @@ export class BreadcrumbsComponent implements OnInit {
     this.ancestors.push({
       title: gallery.title,
       id: gallery.id,
-      link: ['/gallery', gallery.slug, gallery.id]
+      link: [this.root, 'gallery', gallery.slug, gallery.id]
     });
 
   }
@@ -108,7 +110,7 @@ export class BreadcrumbsComponent implements OnInit {
     const g = {
       title: gallery.title,
       id: gallery.id,
-      link: ['/gallery', gallery.slug, gallery.id]
+      link: [this.root, 'gallery', gallery.slug, gallery.id]
     };
     if (g.id === this.home.id) {
       g.link = ['/'];
