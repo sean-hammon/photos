@@ -1,0 +1,23 @@
+{
+  "npmScope": "photos",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "photos": {
+      "tags": []
+    },
+    "photos-e2e": {
+      "tags": [],
+      "implicitDependencies": ["photos"]
+    }
+  }
+}

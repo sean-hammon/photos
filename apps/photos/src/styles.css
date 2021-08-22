@@ -1,0 +1,62 @@
+:root {
+  --primary-font: "Mukta", sans-serif;
+  --secondary-font: "Bebas Neue", sans-serif;
+
+  --color-background: #181818;
+  --color-font: #eeeedd;
+  --color-border: #555;
+  --top-bar-height: 2.4rem;
+
+  --scrollbar-background: #181818;
+  --scrollbar-widget: #555;
+
+  --site-padding: 10px;
+}
+
+body {
+  background: var(--color-background) url("/assets/spinner-tile.png") repeat;
+  margin: 0;
+  color: var(--color-font);
+  font-family: var(--primary-font);
+  line-height: 1.3em;
+}
+
+.__full-frame {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.__display-block {
+  display: block;
+}
+
+.__display-none {
+  display: none;
+}
+
+.__flex-on {
+  display: flex;
+}
+.__flex {
+  flex: 1;
+}
+.__flex-25 {
+  flex: 1;
+}
+.__flex-50 {
+  flex: 2;
+}
+.__flex-75 {
+  flex: 3;
+}
+.__flex-align-vertical {
+  align-items: center;
+}
+.__click-through {
+  pointer-events: none;
+}

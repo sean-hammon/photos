@@ -1,0 +1,29 @@
+:host {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  right: 9px;
+  display: block;
+  height: var(--top-bar-height);
+  color: var(--font-color);
+  background-color: rgba(24, 24, 24, 0.6);
+  z-index: 999;
+}
+.site-title {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  letter-spacing: 0.03em;
+  z-index: 1;
+  font-family: var(--secondary-font);
+  font-size: 1.5rem;
+}
+.photo {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+.description {
+  display: inline-block;
+  margin-left: 3em;
+  font-size: 0.9rem;
+}
