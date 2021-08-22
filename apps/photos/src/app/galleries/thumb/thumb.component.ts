@@ -8,12 +8,12 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { Photo } from '@app/photos';
+import { Photo } from '@ui/photos';
 import { Router } from '@angular/router';
 
-import { environment } from '@env';
-import { fadeAnimation } from '@app/fade.animation';
-import { SessionStore } from '@app/store/session.store';
+import { environment } from '@uenv';
+import { fadeAnimation } from '@ui/fade.animation';
+import { SessionStore } from '@ui/store/session.store';
 
 @Component({
   selector: 'app-thumb',

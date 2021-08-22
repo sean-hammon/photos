@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, fromEvent, Subject, timer } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
-import { Photo } from '@app/photos/photo.interface';
-import { environment } from '@env';
+import { Photo } from '@ui/photos/photo.interface';
+import { environment } from '@uenv';
 
 interface ImageStyles {
   height: string;

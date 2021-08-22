@@ -1,7 +1,7 @@
-import { GalleryProvider } from '@app/galleries';
-import { PhotoProvider } from '@app/photos';
-import { SessionStore } from '@app/store/session.store';
 import { forkJoin } from 'rxjs';
+import { GalleryProvider } from '@ui/galleries';
+import { PhotoProvider } from '@ui/photos';
+import { SessionStore } from '@ui/store/session.store';
 
 export function appInitializer(
   session: SessionStore,

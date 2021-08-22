@@ -1,8 +1,8 @@
+import { Component, OnInit } from '@angular/core';
 import { takeUntil, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { SessionStore } from './../store/session.store';
-import { Component, OnInit } from '@angular/core';
-import { Gallery, GalleryProvider } from '@app/galleries';
+import { SessionStore } from '@ui/store/session.store';
+import { Gallery, GalleryProvider } from '@ui/galleries';
 
 interface GalleryLink {
   title: string;

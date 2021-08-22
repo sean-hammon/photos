@@ -1,10 +1,10 @@
-import { GalleryProvider } from './../gallery.provider';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { SessionStore } from '@app/store/session.store';
 import { Subject } from 'rxjs';
 import { takeUntil, filter, take } from 'rxjs/operators';
-import { Photo, PhotoProvider } from '@app/photos';
+import { SessionStore } from '@ui/store/session.store';
+import { Photo, PhotoProvider } from '@ui/photos';
+import { GalleryProvider } from '@ui/galleries/gallery.provider';
 
 @Component({
   selector: 'app-gallery',

@@ -1,4 +1,4 @@
-import { GalleryMap } from '@app/galleries/gallery-map.interface';
+import { GalleryMap } from '@ui/galleries/gallery-map.interface';
 
 export interface GalleryResponse {
   links: {

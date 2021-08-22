@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { GalleryMap } from './gallery-map.interface';
 import { GalleryResponse } from './gallery-response.interface';
-import { SessionStore } from '@app/store/session.store';
+import { SessionStore } from '@ui/store/session.store';
 
 @Injectable({ providedIn: 'root' })
 export class GalleryService {

@@ -13,8 +13,8 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@env": ["src/environments/environment.ts"]
+      "@ui/*": ["apps/photos/src/app/*"],
+      "@uenv": ["apps/photos/src/environments/environment.ts"]
     },
     "rootDir": "."
   },

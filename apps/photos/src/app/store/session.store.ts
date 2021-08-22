@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Gallery } from '@app/galleries';
-import { Photo } from '@app/photos';
-import { environment } from '@env';
+import { Gallery } from '@ui/galleries';
+import { Photo } from '@ui/photos';
+import { environment } from '@uenv';
 
 @Injectable({ providedIn: 'root' })
 export class SessionStore {

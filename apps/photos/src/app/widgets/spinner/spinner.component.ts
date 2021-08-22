@@ -13,7 +13,7 @@ import {
   state,
   style,
 } from '@angular/animations';
-import { fadeAnimation } from '@app/fade.animation';
+import { fadeAnimation } from '@ui/fade.animation';
 
 @Component({
   selector: 'app-spinner',

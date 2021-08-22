@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { GalleryProvider } from '@app/galleries';
-import { PhotoProvider } from '@app/photos';
+import { GalleryProvider } from '@ui/galleries';
+import { PhotoProvider } from '@ui/photos';
 
 @Component({
   selector: 'app-home',

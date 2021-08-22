@@ -9,7 +9,7 @@ import {
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { SessionStore } from '@app/store/session.store';
+import { SessionStore } from '@ui/store/session.store';
 
 @Component({
   selector: 'app-topbar',

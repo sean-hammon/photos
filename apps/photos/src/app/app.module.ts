@@ -12,10 +12,10 @@ import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
-import { GalleryProvider, GalleryService } from '@app/galleries';
-import { PhotoProvider, PhotoService } from '@app/photos';
-import { appInitializer } from '@app/intializer.factories';
-import { SessionStore } from '@app/store/session.store';
+import { GalleryProvider, GalleryService } from '@ui/galleries';
+import { PhotoProvider, PhotoService } from '@ui/photos';
+import { appInitializer } from '@ui/intializer.factories';
+import { SessionStore } from '@ui/store/session.store';
 
 import { PhotoComponent } from './photos/photo/photo.component';
 import { HomeComponent } from './photos/home/home.component';

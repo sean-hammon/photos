@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subject, forkJoin, BehaviorSubject } from 'rxjs';
-import { SessionStore } from '@app/store/session.store';
-import { PhotoProvider, PhotoDisplay, PhotoUxHelper } from '@app/photos';
-import { fadeAnimation } from '@app/fade.animation';
-import { GalleryProvider } from '@app/galleries';
-import { environment } from '@env';
+import { SessionStore } from '@ui/store/session.store';
+import { PhotoProvider, PhotoDisplay, PhotoUxHelper } from '@ui/photos';
+import { fadeAnimation } from '@ui/fade.animation';
+import { GalleryProvider } from '@ui/galleries';
+import { environment } from '@uenv';
 
 @Component({
   selector: 'app-photo',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Photo } from '@app/photos/photo.interface';
+import { Photo } from '@ui/photos/photo.interface';
 import { tap } from 'rxjs/operators';
-import { Gallery, GalleryProvider } from '@app/galleries';
+import { Gallery, GalleryProvider } from '@ui/galleries';
 
 import { PhotoDisplay } from './photo-display.interface';
 import { PhotoMap } from './photo-map.interface';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 
-import { SessionStore } from '@app/store/session.store';
+import { SessionStore } from '@ui/store/session.store';
 
 import { GalleryMap } from './gallery-map.interface';
 import { Gallery } from './gallery.interface';

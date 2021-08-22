@@ -3,9 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from '@env';
-import { PhotoResponse, PhotoMap } from '@app/photos';
-import { SessionStore } from '@app/store/session.store';
+import { PhotoResponse, PhotoMap } from '@ui/photos';
+import { SessionStore } from '@ui/store/session.store';
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
